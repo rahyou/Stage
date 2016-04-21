@@ -1,0 +1,17 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
+__global__ void vec_add(float *A, float* C,
+				int size)
+{
+  int index = blockIdx.x*blockDim.x + threadIdx.x;
+
+  if(index<size)
+    C[index] = A[index] + 1;
+}
+
+#ifdef __cplusplus
+}
+#endif
