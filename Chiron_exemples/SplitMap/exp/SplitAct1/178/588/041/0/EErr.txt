@@ -1,0 +1,1 @@
+./extractor.cmd: ligne 2 : [: ./extractor.cmd : nombre entier attendu comme expression

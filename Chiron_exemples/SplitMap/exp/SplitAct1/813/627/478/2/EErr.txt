@@ -1,0 +1,2 @@
+./extractor.cmd: command substitution: ligne 4: Erreur de syntaxe près du symbole inattendu « -1 »
+./extractor.cmd: command substitution: ligne 4: `(2*3)-1'

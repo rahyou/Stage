@@ -1,0 +1,8 @@
+#I=$((%=ID%+3)) 
+#[ "%=ID%" -gt "0" ] && I=$((%=ID%+3)) 
+ echo "IDENT;ID;T1;T2" >> ERelation.txt 
+ echo "%=IDENT%;$((%=ID%*3));%=T1%;%=T2%" >> ERelation.txt
+I=$((%=ID%*3)) 
+ echo "%=IDENT%;$((I+1));%=T1%;%=T2%" >> ERelation.txt 
+
+ echo "%=IDENT%;$((I+2));%=T1%;%=T2%" >> ERelation.txt 
