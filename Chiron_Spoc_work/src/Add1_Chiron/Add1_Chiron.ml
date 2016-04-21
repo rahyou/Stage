@@ -8,7 +8,7 @@
 open Spoc
 (* kernel, fichier, nom de kernel*)
 
-kernel vec_add :  Spoc.Vector.vfloat32-> Spoc.Vector.vfloat32->Spoc.Vector.vfloat32 -> int -> unit = "kernels/Spoc_kernels" "Add1_Chiron"
+kernel vec_add :  Spoc.Vector.vfloat32-> Spoc.Vector.vfloat32->Spoc.Vector.vfloat32 -> int -> unit = "kernels/Spoc_kernels" "vec_add"
 
 
 let devices = Spoc.Devices.init ()
@@ -21,8 +21,9 @@ let verify = ref true
 let files = ref []
 
 let _ =
+
   Arg.parse ([]) (fun s -> files :=  s:: !files  ) "";
-  
+  Random.self_init();
   let args = List.rev !files in
   let id, file1, file2 = match args with 
   | [id; file1; file2] -> id, file1, file2
@@ -46,21 +47,21 @@ let _ =
 let sortie = "file" ^(id) ; in
 
     begin
-      List.iter ( Printf.printf "%.3f\n") floats1; 
+ 
       Printf.printf "Will use simple precision\n"; 
       Printf.printf "Allocating Vectors (on CPU memory)\n";
-      flush stdout;   
-     
+      flush stdout;    
       let a = Spoc.Vector.create Spoc.Vector.float32 (!vec_size)
       and b = Spoc.Vector.create Spoc.Vector.float32 (!vec_size)
       and res = Spoc.Vector.create Spoc.Vector.float32 (!vec_size) in
-  
+
       let vec_add = vec_add in  
       for i = 0 to (Spoc.Vector.length a - 1) do
-     (* List.iteri (Spoc.Mem.set a) floats1;*)
-      (*List.iteri (Spoc.Mem.set b) floats2;*)
-      Spoc.Mem.set a i ( List.nth floats1 i);
-      Spoc.Mem.set b i ( List.nth floats2 i );
+      List.iteri (Spoc.Mem.set a) floats1;
+      List.iteri (Spoc.Mem.set b) floats2;
+     (* Spoc.Mem.set a i ( List.nth floats1 i);*)
+      (*Spoc.Mem.set b i ( List.nth floats2 i );*)
+
       done;
       if (not !auto_transfers) then
 	begin
@@ -74,7 +75,7 @@ let sortie = "file" ^(id) ; in
 	end;
       begin
       
-    	Printf.printf "Computing ----\n";
+    	Printf.printf "Computing \n";
     	flush stdout;
 let threadsPerBlock = match !dev.Devices.specific_info with
       	  | Devices.OpenCLInfo clI ->
@@ -98,25 +99,19 @@ let threadsPerBlock = match !dev.Devices.specific_info with
 	  Spoc.Mem.to_cpu res ();
 	end;
       Spoc.Devices.flush !dev ();
-    
-     (* imprimer la valeur de res dans le fichier de sortie *)
-  
-     let oc1 = open_out sortie in 
+      let oc1 = open_out sortie in 
      for i = 0 to (Spoc.Vector.length res - 1) do
-      	Printf.fprintf oc1 "%.3f" (Spoc.Mem.get res i);
+      	Printf.fprintf oc1 "%.3f\n" (Spoc.Mem.get res i);
 		done;
 	close_out oc1;
-
- (* imprimer les colonnes dans le fichier Erelation.txt*)
+	
   let oc = open_out "Erelation.txt" in
 	Printf.fprintf oc "id;f1;f2;f3\n";
-	Printf.fprintf oc "%s" id;
-	Printf.fprintf oc "%s" file1;
-	Printf.fprintf oc "%s" file2;
+	Printf.fprintf oc "%s;" id;
+	Printf.fprintf oc "%s;" file1;
+	Printf.fprintf oc "%s;" file2;
     Printf.fprintf oc "%s\n" sortie;
  close_out oc;
-   (*output_string sortie "%\n" (Spoc.Mem.get res 0);*) 
-  
     end; 
  
 
