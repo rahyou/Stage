@@ -1,0 +1,33 @@
+org.postgresql.util.PSQLException: ERROR: extra data after last expected column
+  Où : COPY iact1, line 2: "0;1000;1001;/home/racha/Documents/chiron_exemples/Map-Spoc/file1;/home/racha/Documents/chiron_exempl..."
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2103)
+	at org.postgresql.core.v3.QueryExecutorImpl.processCopyResults(QueryExecutorImpl.java:964)
+	at org.postgresql.core.v3.QueryExecutorImpl.endCopy(QueryExecutorImpl.java:826)
+	at org.postgresql.core.v3.CopyInImpl.endCopy(CopyInImpl.java:61)
+	at org.postgresql.copy.CopyManager.copyIn(CopyManager.java:147)
+	at org.postgresql.copy.CopyManager.copyIn(CopyManager.java:126)
+	at chiron.EProvenance.insertInputRelationData(EProvenance.java:1182)
+	at chiron.EWorkflow.evaluateDependencies(EWorkflow.java:226)
+	at chiron.Chiron.open(Chiron.java:204)
+	at chiron.Chiron.main(Chiron.java:56)
+Execute...
+INSERT INTO "workflow-query".oact1 () ./experiment.cmd;./extractor.cmd
+avr. 21, 2016 3:49:48 PM chiron.EProvenanceActivityQueue generateActivations
+GRAVE: null
+org.postgresql.util.PSQLException: ERROR: syntax error at or near ")"
+  Position : 37
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2103)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1836)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:512)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:388)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeUpdate(AbstractJdbc2Statement.java:334)
+	at vs.database.M_Query.executeUpdate(M_Query.java:53)
+	at chiron.EProvenance.executeQueryActivation(EProvenance.java:1861)
+	at chiron.concept.Query.generateActivations(Query.java:81)
+	at chiron.EProvenanceActivityQueue.generateActivations(EProvenanceActivityQueue.java:61)
+	at chiron.EProvenanceActivityQueue.run(EProvenanceActivityQueue.java:48)
+
+
+erreur d'activité query
+===================================================================================================
