@@ -1,2 +1,0 @@
-[ "5" -gt "2" ] && echo "IDENT;ID;T1;T2" >> ERelation.txt
-[ "5" -gt "2" ] && echo "%=IDENT%;5;1000;1002" >> ERelation.txt 

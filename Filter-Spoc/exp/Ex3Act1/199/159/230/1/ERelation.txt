@@ -1,2 +1,0 @@
-IDENT;ID;T2
-%=IDENT%;1;2001
