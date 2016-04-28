@@ -1,0 +1,9 @@
+Filter_ocaml marche pas à cause de:
+
+	Fatal error: the file './a.out' is not a bytecode executable file
+
+Filter_Spoc marche pas à cause de:
+
+	org.postgresql.util.PSQLException: ERROR: missing data for column "f1"
+  Où : COPY iact1, line 4: ""
+
