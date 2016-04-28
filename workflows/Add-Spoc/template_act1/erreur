@@ -1,0 +1,5 @@
+./extractor.cmd 3 3000 4000
+Fatal error: exception Failure("int_of_string")
+===================================================
+
+a.out is not a bytecode executable
