@@ -1,0 +1,6 @@
+les champs de input.dataset été id;t1;t2;f1;f2;f3, sa a posé un problème 
+
+org.postgresql.util.PSQLException: ERROR: missing data for column "t1"
+  Où : COPY iact1, line 4: ""
+  
+J'ai changé à id;f1;f2;f3,
