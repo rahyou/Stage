@@ -1,13 +1,18 @@
 Filter_ocaml 
 ------------
 
-une activiteé "Filter", les entrées sont l'id, t1, t2, t3
+une activiteé "Filter", les entrées sont l'id, t1, t2
 
 a.out calcule la somme t1+t2 et met la résultat sous t3
 
 marche pas à cause de:
 
 	Fatal error: the file './a.out' is not a bytecode executable file
+	
+qd on copie un executable, il doit étre compilé statiquement (pas des dépendences machine local), le changement de l'architecture peut 
+entreiner que le biniaire ne sera plus executable.
+Une autre altérnative: on copie le Makefile sur la machine distante pour génerer l'executable. 
+	
 _________________________________________________________________________
 
 Filter_Spoc 
@@ -36,4 +41,6 @@ marche pas à cause de :
 
 ________________________________________________________________________
 
-_Apparament il accepte que des bash command
+il faut que le fichier .cmd soit au format unix.
+
+
