@@ -1,0 +1,78 @@
+1,35c1,41
+< <Chiron>
+< 	<environment verbose="true"/>
+< 	<constraint workflow_exectag="workflow-f-3" cores="1"/>
+< 	<workspace workflow_dir="/home/racha/Documents/chiron/Chiron_exemples/Filter_Ocaml_File"/>
+< 	<database name="chiron" username="chiron" password="chiron" port="5433" server="localhost"/>
+< 	<conceptualWorkflow tag="workflow-f" description="">
+< 	    	
+<     		<Activity tag="Ex3Act1" description="" type="FILTER" activation="./experiment.cmd;./extractor.cmd" template="%=WFDIR%/template_act1">
+< 			
+< 			<relation reltype="Input" name="IAct1"/>
+< 			<relation reltype="Output" name="OAct1" />
+< 
+< 			<field name="ID" type="float" input="IAct1" output="OAct1" decimalplaces="0"/>
+< 			<field name="FILE1" type="file" input="IAct1" output="OAct1"/>
+< 			<field name="FILE2" type="file" input="IAct1" output="OAct1"/>
+< 		<field name="K" type="float" output="OAct1" decimalplaces="0"/>
+< 	
+<         </Activity>
+< 		
+< 		<Activity tag="Ex3Act2" description="" type="MAP" activation="./experiment.cmd;./extractor.cmd" template="%=WFDIR%/template_act2">
+< 			
+< 			<relation reltype="Input" dependency="Ex3Act1"/>
+< 			<relation reltype="Output"   name="OAct2" />
+< 			
+< 			<field name="ID" type="float"  output="OAct2" decimalplaces="0"/>
+< 			<field name="FIlE2" type="float" output="OAct2" decimalplaces="0"/>
+<         </Activity>
+<         
+< 	</conceptualWorkflow>
+< 	
+< 	
+< 	<executionWorkflow tag="workflow-f" execmodel="DYN_FAF" expdir="%=WFDIR%/exp">
+< 		<relation name="IAct1" filename="input.dataset"/>
+< 	</executionWorkflow>
+< </Chiron>
+---
+> <Chiron>
+> 	<environment verbose="true"/>
+> 	<constraint workflow_exectag="workflow-map-1" cores="1"/>
+> 	<workspace workflow_dir="/home/racha/Documents/chiron/Chiron_exemple/workflow-map"/>
+> 	<database name="chiron" username="chiron" password="chiron" port="5432" server="localhost"/>
+> 	<conceptualWorkflow tag="workflow-map" description="">
+> 		<activity tag="act1" description="" type="MAP" activation="./experiment.cmd;./extractor.cmd" template="%=WFDIR%/template_act1">
+> 			<relation reltype="Input" name="IAct1"/>
+> 			<relation reltype="Output" name="OAct1" />
+> 			<field name="IDENT" type="float" input="IAct1" output="OAct1" decimalplaces="0"/>
+> 			<field name="FILE" type="file" input="IAct1" output="OAct1"/>
+> 			<field name="K" type="float" output="OAct1" decimalplaces="0"/>
+> 			<field name="TA" type="float" output="OAct1" decimalplaces="0"/>
+> 			<field name="TB" type="float" output="OAct1" decimalplaces="0"/>
+> 			<field name="TC" type="float" output="OAct1" decimalplaces="0"/>
+> 			<field name="TD" type="float" output="OAct1" decimalplaces="0"/>
+> 			<field name="TE" type="float" output="OAct1" decimalplaces="0"/>
+> 			<field name="TF" type="float" output="OAct1" decimalplaces="0"/>
+>     	</activity>
+> 		<activity tag="act2" description="" type="MAP" activation="./experiment.cmd;./extractor.cmd" template="%=WFDIR%/template_act2">
+> 			<relation reltype="Input" dependency="act1"/>
+> 			<relation reltype="Output" name="OAct2" />
+> 			<field name="IDENT" type="float" output="OAct2" decimalplaces="0"/>
+> 			<field name="FILE" type="file"/>
+> 			<field name="K" type="float" output="OAct2" decimalplaces="0"/>
+> 			<field name="TA" type="float" output="OAct2" decimalplaces="0"/>
+> 			<field name="TB" type="float" output="OAct2" decimalplaces="0"/>
+> 			<field name="TC" type="float" output="OAct2" decimalplaces="0"/>
+>     	</activity>
+> 		<activity tag="act3" description="" type="MAP" activation="./experiment.cmd;./extractor.cmd" template="%=WFDIR%/template_act3">
+> 			<relation reltype="Input" dependency="act2"/>
+> 			<relation reltype="Output" name="OAct3" />
+> 			<field name="IDENT" type="float" output="OAct3" decimalplaces="0"/>
+> 			<field name="K" type="float" output="OAct3" decimalplaces="0"/>
+> 			<field name="TA" type="float" output="OAct3" decimalplaces="0"/>
+>     	</activity>
+> 	</conceptualWorkflow>
+> 	<executionWorkflow tag="workflow-map" execmodel="DYN_FAF" expdir="%=WFDIR%/exp">
+> 		<relation name="IAct1" filename="input.dataset"/>
+> 	</executionWorkflow>
+> </Chiron>

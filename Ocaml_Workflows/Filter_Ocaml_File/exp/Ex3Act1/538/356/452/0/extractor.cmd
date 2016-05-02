@@ -1,0 +1,1 @@
+make && ./myProg 0 /home/racha/Documents/stage/Ocaml_Workflows/Filter_Ocaml_File/exp/Ex3Act1/538/356/452/0/file-1.csv /home/racha/Documents/stage/Ocaml_Workflows/Filter_Ocaml_File/exp/Ex3Act1/538/356/452/0/file-2.csv 

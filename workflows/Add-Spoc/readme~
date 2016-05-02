@@ -1,5 +1,0 @@
-exemple avec un kernel pour un seul calcul en Spoc
-
-marche pas à cause de :
-
-	Fatal error: the file './Add1_Chiron.byte' is not a bytecode executable file

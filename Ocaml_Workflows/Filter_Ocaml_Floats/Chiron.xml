@@ -1,0 +1,33 @@
+<Chiron>
+	<environment verbose="true"/>
+	<constraint workflow_exectag="workflow-fi-3" cores="1"/>
+	<workspace workflow_dir="/home/racha/Documents/stage/Ocaml_Workflows/Filter_Ocaml_Floats"/>
+	<database name="chiron" username="chiron" password="chiron" port="5433" server="localhost"/>
+	<conceptualWorkflow tag="workflow-fi" description="">
+	    	
+    		<Activity tag="Ex3Act1" description="" type="FILTER" activation="./experiment.cmd;./extractor.cmd" template="%=WFDIR%/template_act1">
+			
+			<relation reltype="Input" name="IAct1"/>
+			<relation reltype="Output" name="OAct1" />
+
+			<field name="id" type="float"  input="IAct1" output="OAct1" decimalplaces="0"/>
+			<field name="t1" type="float"  input="IAct1"  decimalplaces="0"/>
+			<field name="t2" type="float"  input="IAct1" output="OAct1" decimalplaces="0"/>
+        </Activity>
+		
+		<Activity tag="Ex3Act2" description="" type="MAP" activation="./experiment.cmd;./extractor.cmd" template="%=WFDIR%/template_act2">
+			
+			<relation reltype="Input" dependency="Ex3Act1"/>
+			<relation reltype="Output"   name="OAct2" />
+			
+			<field name="id" type="float"  output="OAct2" decimalplaces="0"/>
+			<field name="t2" type="float" output="OAct2" decimalplaces="0"/>
+        </Activity>
+        
+	</conceptualWorkflow>
+	
+	
+	<executionWorkflow tag="workflow-fi" execmodel="DYN_FAF" expdir="%=WFDIR%/exp">
+		<relation name="IAct1" filename="input.dataset"/>
+	</executionWorkflow>
+</Chiron>
