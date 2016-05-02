@@ -12,11 +12,12 @@
 
 
 
-###### Installation
+__________________________________________
+ Installation
 
 il faut corriger les chemins dans:
 
-* Chiron.xml
-* input.dataset
-* execute.sh
-* restore.sh
+ Chiron.xml
+ input.dataset
+ execute.sh
+ restore.sh
