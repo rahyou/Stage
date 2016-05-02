@@ -1,18 +1,18 @@
 # Stage
 
 
-####### Ocaml_Workflows
+###### Ocaml_Workflows
 
 
-### Spoc_Workflows
-
-
-
-### bash_Workflows
+###### Spoc_Workflows
 
 
 
-### Installation
+###### bash_Workflows
+
+
+
+###### Installation
 
 il faut corriger les chemins dans:
 
