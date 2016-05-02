@@ -1,0 +1,2 @@
+nvcc fatal   : No input files specified; use option --help for more information
+make: *** [Spoc_kernels.ptx] Erreur 1

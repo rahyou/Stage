@@ -1,0 +1,9 @@
+ocamlfind ocamlopt -thread -package spoc -linkpkg -package spoc_external_kernels -syntax camlp4o Add1_Chiron.ml -o Add1_Chiron.asm
+ocamlfind ocamlc -thread -package spoc -linkpkg -package spoc_external_kernels -syntax camlp4o Add1_Chiron.ml -o Add1_Chiron.byte
+for i in ; do \
+		( cp src/$i/*.byte* /Bytecode; cp src/$i/*.asm* /Native; \
+		if [ -e src/$i/kernels ]; then \
+			rsync -a --exclude .svn src/$i/kernels /Bytecode/;\
+	 		rsync -a --exclude .svn src/$i/kernels /Native/;\
+		fi;)\
+	done
