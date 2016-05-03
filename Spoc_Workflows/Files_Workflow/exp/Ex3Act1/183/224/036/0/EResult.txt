@@ -1,1 +1,0 @@
-nvcc  -m64 -O3 -g -ptx   -o  Spoc_kernels.cu
