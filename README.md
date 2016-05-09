@@ -19,6 +19,6 @@
 
 * filter
 __________________________________________
- Installation
+ Pour tester
 
 il faut corriger les chemins dans: Chiron.xml, input.dataset, execute.sh, restore.sh.
