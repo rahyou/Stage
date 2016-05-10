@@ -7,8 +7,8 @@ _ Dans la base Chiron met un chemin pour le fichier de sortie.
 
 _ Il faut changer le format des fichiers, un image en format csv.
 
-![alt tag](https://raw.githubusercontent.com/rahyou/stage/Files_Workflows/Files_Spoc_O.png)
+![alt tag](https://raw.githubusercontent.com/rahyou/Stage/Spoc_Workflows/Files_Workflow/Files_Spoc_O.png)
 
 
 
-![alt tag](https://raw.githubusercontent.com/rahyou/stage/Files_Workflows/Files_Spoc_I.png)
+![alt tag](https://raw.githubusercontent.com/rahyou/Stage/Spoc_Workflows/Files_Workflow/Files_Spoc_I.png)
