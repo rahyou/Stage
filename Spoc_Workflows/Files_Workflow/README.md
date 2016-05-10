@@ -47,6 +47,18 @@ contient les champs de la relation de sortie, on trouve la colonne FILE3 qui con
 
 
 
+
+
+
+
+
+
+
+
+
+
+=====================================================================================================================
+
 _ Les fichiers de sortie sont distribués dans les noeuds de calcules, Comment les collectés, ils sont dans la base?
 
 _ Dans la base Chiron met un chemin pour le fichier de sortie. 
