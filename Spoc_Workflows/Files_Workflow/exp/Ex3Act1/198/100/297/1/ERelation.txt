@@ -1,0 +1,2 @@
+ID;FILE1;FILE2;FILE3
+1;/home/racha/Documents/stage/Spoc_Workflows/Files_Workflow/exp/Ex3Act1/198/100/297/1/file-3.csv;/home/racha/Documents/stage/Spoc_Workflows/Files_Workflow/exp/Ex3Act1/198/100/297/1/file-4.csv;Sortie1.csv

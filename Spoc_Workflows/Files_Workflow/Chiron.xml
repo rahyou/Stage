@@ -16,6 +16,7 @@
 			<field name="FILE2" type="file" input="IAct1" output="OAct1">
 			<field name="K" type="float"  output="OAct1" decimalplaces="0"/>
 			</field>
+	<field name="FILE3" type="file"  output="OAct1"/>
         </Activity>
 		
 		
