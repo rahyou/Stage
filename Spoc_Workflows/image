@@ -1,0 +1,15 @@
+Histograms are a commonly used analysis tool in image processing and data mining
+applications.
+
+They show the frequency of occurrence of each data element.
+
+Although trivial to compute on the CPU, histograms are traditionally quite difficult to
+compute efficiently on the GPU. 
+
+Previously proposed methods include using the occlusion query mechanism (which requires a rendering pass for each histogram bucket),
+ or sorting the pixels of the image and then searching for the start of each bucket, both of which are quite
+expensive.
+We can use CUDA and the shared memory to efficiently produce histograms, which can
+then either be read back to the host or kept on the GPU for later use. The two CUDA SDK
+samples: histogram64 and histogram256 demonstrate different approaches to efficient
+histogram computation on GPU using CUDA.
