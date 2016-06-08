@@ -11,10 +11,10 @@ __constant int soby[3][3] = { {-1,-2,-1},
 //               squares.
 // data:  image input data with each pixel taking up 1 byte (8Bit 1Channel)
 // out:   image output data (8B1C)
-// theta: angle output data  __global uchar *theta,
+// theta: angle output data  
 __kernel void sobel_kernel(__global int *data,
                            __global int *out,
-                              
+                             __global uchar *theta, 
                                    int rows,
                                     int img_height)
 {
@@ -125,5 +125,5 @@ else
 
     // Round the angle to one of four possibilities: 0, 45, 90, 135 degrees
     // then store it in the theta buffer at the proper position
-  // theta[pos] = ((int)(degrees(angle * (PI/8) + PI/8-0.0001) / 45) * 45) % 180;
+  theta[pos] = ((int)(degrees(angle * (PI/8) + PI/8-0.0001) / 45) * 45) % 180;
 }
