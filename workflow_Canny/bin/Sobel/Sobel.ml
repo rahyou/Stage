@@ -4,7 +4,7 @@
 open Spoc
 open Images
 
-    kernel sobel_kernel : Spoc.Vector.vint32-> Spoc.Vector.vint32 -> int -> int -> unit = "kernels/sobel_kernel" "sobel_kernel"
+    kernel sobel_kernel : Spoc.Vector.vint32-> Spoc.Vector.vint32 -> Spoc.Vector.vint32 -> int -> int -> unit = "kernels/sobel_kernel" "sobel_kernel"
 
 let devices = Spoc.Devices.init ()
 
@@ -41,7 +41,8 @@ let _ =
   Printf.printf "Will use simple precision\n"; 
 
 
-  let  a = Spoc.Vector.create Vector.int32 (img.Rgb24.height * img.Rgb24.width) 
+  let  a = Spoc.Vector.create Vector.int32 (img.Rgb24.height * img.Rgb24.width)
+  and  theta = Spoc.Vector.create Vector.int32 (img.Rgb24.height * img.Rgb24.width)
   and res = Spoc.Vector.create Vector.int32 (img.Rgb24.height * img.Rgb24.width )  in
 
 
@@ -64,6 +65,7 @@ let _ =
       Printf.printf "Transfering Values (on Device memory)\n";
       flush stdout;
       Spoc.Mem.to_device a !dev;
+      Spoc.Mem.to_device theta !dev;
       Spoc.Mem.to_device res !dev;
     end;
   begin     
@@ -99,7 +101,7 @@ let _ =
 
     Printf.printf "compile \n";
     sobel_kernel#compile (~debug: true) !dev;
-    Spoc.Kernel.run !dev (block, grid) sobel_kernel (a, res, img.Rgb24.width, img.Rgb24.height);
+    Spoc.Kernel.run !dev (block, grid) sobel_kernel (a, res, theta, img.Rgb24.width, img.Rgb24.height);
     Pervasives.flush stdout;
   end;	
 
@@ -153,10 +155,20 @@ let _ =
      done;
      close_out oc1;
   *) 
+  let oc = open_out "theta.csv" in
+  Printf.fprintf oc "theta\n";
+   for t = 0 to (Spoc.Vector.length theta - 1) do
+       let c =  Int32.to_int(Spoc.Mem.get theta t)in
+    output_byte oc1 c; 
+  done;
+  
+  close_out oc;
+
   let oc = open_out "Erelation.txt" in
-  Printf.fprintf oc "ID;IMG1\n";
+  Printf.fprintf oc "ID;IMG1;FILE\n";
   Printf.fprintf oc "%s;" id;
-  Printf.fprintf oc "%s\n" sortie;
+  Printf.fprintf oc "%s" sortie;
+   Printf.fprintf oc "theta.csv\n" sortie;
   close_out oc;
 
 
