@@ -1,0 +1,44 @@
+=== DESCRIPTION ============================================================
+This directory contains a workflow example using Chiron. One of the three 
+workflow activities corresponds to the invocation of a SPOC application, 
+which users can switch to execute in CPU or GPU.
+
+=== SOFTWARE REQUIREMENTS ============================================================
+This workflow execution have the following software requirements:
+1) Postgres Database Management System (DBMS) (www.postgresql.org)
+2) SPOC (http://mathiasbourgoin.github.io/SPOC)
+
+=== ENVIRONMENT CONFIGURATION ============================================================
+To use these softwares correctly in this workflow, please configure them as follows:
+1) Configuration of a relational database using Postgres DBMS.
+2) Compilation of the SPOC application code (i.e., CustomPi application).
+3) Configuration of the file "input.dataset" in directory "exp", which represents the input
+relation from this workflow using Chiron.
+
+Obs(1): After the Postgres DBMS installation, please configure a relational database
+in this DBMS using the SQL script to generate the database schema to be used by
+Chiron. This SQL script is named as "chiron-database.sql" in directory "bin"
+
+Obs(2): To compile SPOC application code, please access the directory of this 
+application and execute make command in Linux-based operating system, as follows:
+$ cd bin/CustomPi
+$ make clean
+$ make
+
+Obs(3): File with input dataset need to have all file paths updated according to the current 
+file system.
+
+=== WORKFLOW EXECUTION ==========================================================================
+To submit workflow execution using Chiron, please execute the following script:
+$ ./submit.sh
+
+Obs(4): This script invokes other three scripts, named as "delete.sh", "restore.sh", and "execute.sh".
+The former script deletes all directories generated from previous workflow executions in "exp" 
+directory. The second script executes ChironSetup in order to update the conceptual workflow in
+database. The third script invokes ChironCore to execute the workflow considering the conceptual 
+definition in Postgres's relational database.
+
+=== CONFIGURATION OF SPOC APPLICATION ============================================================
+To define the most suitable computing resource (CPU or GPU) to execute SPOC application, you can 
+change the command line in "experiment.cmd" file. Since the command lines (for CPU and GPU) are already there, you 
+just need to comment or uncomment invocations for a specific computing resource.

@@ -1,0 +1,7 @@
+Will use device : Quadro 1000M
+Will use simple precision
+Allocating Vectors (on CPU memory)
+Transfering Values (on Device memory)
+Computing 
+Transfering Vectors (on CPU memory)
+ 

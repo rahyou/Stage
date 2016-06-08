@@ -1,0 +1,1 @@
+cp: impossible d'évaluer «output.ppm»: Aucun fichier ou dossier de ce type

@@ -1,7 +1,0 @@
-/home/racha/Documents/stage/Spoc_Workflows/Files_Workflow/exp/Ex3Act1/198/100/375/2
-Will use device : Quadro 1000M
-Will use simple precision
-Allocating Vectors (on CPU memory)
-Transfering Values (on Device memory)
-Computing 
-Transfering Vectors (on CPU memory)

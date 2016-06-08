@@ -1,0 +1,41 @@
+<SciCumulus>
+	<environment type="LOCAL" verbose="true"/>
+	<constraint workflow_exectag="workflow-map-gpu-1" cores="2" performance="false"/>
+	<workspace workflow_dir="/home/racha/Documents/stage/workflow_Canny"/>
+	<database name="scc2" username="scc2" password="scc2" port="5433" server="localhost"/>
+	<conceptualWorkflow tag="workflow-map-canny" description="">
+		<activity constrained="false" tag="act1" description="" type="MAP" activation="./experiment.cmd" template="%=WFDIR%/template_act1">
+			<relation reltype="Input" name="IAct1"/>
+			<relation reltype="Output" name="OAct1" />
+			<field name="ID" type="float" input="IAct1" output="OAct1" decimalplaces="0"/>
+			<field name="IMG1" type="text" input="IAct1" output="OAct1"/>
+    	</activity>
+		<activity tag="act2" description="" type="MAP" activation="./experiment.cmd" template="%=WFDIR%/template_act2">
+			<relation reltype="Input" dependency="act1"/>
+			<relation reltype="Output" name="OAct2" output="OAct1"/>
+			<field name="ID" type="float" output="OAct2" decimalplaces="0"/>
+			<field name="IMG1" type="text" output="OAct2"/>
+    	</activity>
+		<activity tag="act3" description="" type="MAP" activation="./experiment.cmd" template="%=WFDIR%/template_act3">
+			<relation reltype="Input" dependency="act2"/>
+			<relation reltype="Output" name="OAct3"/>
+			<field name="ID" type="float" output="OAct3" decimalplaces="0"/>
+			<field name="IMG1" type="text" output="OAct3"/>
+    	</activity>
+		<activity tag="act4" description="" type="MAP" activation="./experiment.cmd" template="%=WFDIR%/template_act4">
+			<relation reltype="Input" dependency="act3"/>
+			<relation reltype="Output" name="OAct4"/>
+			<field name="ID" type="float" output="OAct4" decimalplaces="0"/>
+			<field name="IMG1" type="text" output="OAct4"/>
+    	</activity>
+	<activity tag="act5" description="" type="MAP" activation="./experiment.cmd" template="%=WFDIR%/template_act4">
+			<relation reltype="Input" dependency="act4"/>
+			<relation reltype="Output" name="OAct5"/>
+			<field name="ID" type="float" output="OAct5" decimalplaces="0"/>
+			<field name="IMG1" type="text" output="OAct5"/>
+    	</activity>
+	</conceptualWorkflow>
+	<executionWorkflow tag="workflow-map-canny" execmodel="DYN_FAF" expdir="%=WFDIR%/exp">
+		<relation name="IAct1" filename="input.dataset"/>
+	</executionWorkflow>
+</SciCumulus>
