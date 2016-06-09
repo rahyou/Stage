@@ -54,6 +54,7 @@ let _ =
     for i=0 to l-1 do  
       let color = Rgb24.get img i j in
         Spoc.Mem.set a !f (Int32.of_int (read_ascii_24 color)) ;
+        Spoc.Mem.set theta !f 90.0; 
       f := !f+1;
     done;
   done;
@@ -110,6 +111,7 @@ let _ =
       Printf.printf "Transfering Vectors (on CPU memory)\n";
       Pervasives.flush stdout;
       Spoc.Mem.to_cpu res ();
+            Spoc.Mem.to_cpu theta ();
     end;
   Spoc.Devices.flush !dev ();
 
@@ -172,7 +174,7 @@ let _ =
   close_out oc;
 
 
-  let oc = open_out "entre.txt" in
+  let oc = open_out "relation.txt" in
   Printf.fprintf oc "ID;IMG1\n";
   Printf.fprintf oc "%s;" id;
   Printf.fprintf oc "%s\n" file1;

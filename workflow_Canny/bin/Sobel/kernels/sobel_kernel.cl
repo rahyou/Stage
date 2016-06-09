@@ -32,8 +32,6 @@ __local int l_data[3][3];
 int sum=0;
 int globale_taille = 512*512 -1;
  
- 
-
      // copy to local
     int pos00 = pos -img_height -1;
     
@@ -125,5 +123,5 @@ else
 
     // Round the angle to one of four possibilities: 0, 45, 90, 135 degrees
     // then store it in the theta buffer at the proper position
-  theta[pos] = ((int)(degrees(angle * (PI/8) + PI/8-0.0001) / 45) * 45) % 180;
+theta[pos]=((int)(degrees(angle * (PI/8) + PI/8-0.0001) / 45) * 45) % 180;
 }
