@@ -5,7 +5,7 @@
 __constant float gaus[3][3] = { {0.0625, 0.125, 0.0625},
                                 {0.1250, 0.250, 0.1250},
                                 {0.0625, 0.125, 0.0625} };
-__kernel void hyst_kernel(__global uchar *data,
+__kernel void gauss_kernel(__global uchar *data,
                            __global uchar *out,
                                     int img_height,
                                     int cols)
@@ -15,10 +15,11 @@ __kernel void hyst_kernel(__global uchar *data,
 	float highThresh = 70;
 
 
-int pos = get_local_id (0) + (get_group_id(0) * get_local_size (0));
+int pos = 
+get_local_id (0) + (get_group_id(0) * get_local_size (0));
    const uchar EDGE = 255;
 
-    uchar magnitude = data[pos];
+   uchar magnitude = data[pos];
     
     if (magnitude >= highThresh)
         out[pos] = EDGE;
@@ -34,4 +35,7 @@ int pos = get_local_id (0) + (get_group_id(0) * get_local_size (0));
         else
              out[pos] =  out[pos] = 0;
     }
+
+
+
 }

@@ -293,7 +293,7 @@ let save_ppm_oc img oc =
   if l = 0 then invalid_arg "save_ppm: invalid null line number";
   let c = img.Rgb24.width in
   if c = 0 then invalid_arg "save_ppm: invalid null column number";
-  (* let has_transp = save_raw_ppm_oc img oc l c in
+   (*let has_transp = save_raw_ppm_oc img oc l c in
  
   if has_transp then
    begin

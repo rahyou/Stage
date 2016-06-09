@@ -1,13 +1,12 @@
 
 
-
 #use  "readppm.ml";
 (*let img = OImages.load file1 [] in                                          
   let w, h = OImages.size img in *)
 open Spoc
 open Images
 
-    kernel hyst_kernel : Spoc.Vector.vint32-> Spoc.Vector.vint32 -> int -> int -> unit = "kernels/hyst_kernel" "hyst_kernel"
+    kernel gauss_kernel : Spoc.Vector.vint32-> Spoc.Vector.vint32 -> int -> int -> unit = "kernels/gaussian_kernel" "gauss_kernel"
 
 let devices = Spoc.Devices.init ()
 
@@ -48,7 +47,7 @@ let _ =
   and res = Spoc.Vector.create Vector.int32 (img.Rgb24.height * img.Rgb24.width )  in
 
 
-  let hyst_kernel = hyst_kernel in  
+  let gauss_kernel = gauss_kernel in  
   let l = img.Rgb24.height in
   let c = img.Rgb24.width  in
   let f= ref 0 in
@@ -101,8 +100,8 @@ let _ =
      
 
     Printf.printf "compile \n";
-    hyst_kernel#compile (~debug: true) !dev;
-    Spoc.Kernel.run !dev (block, grid) hyst_kernel (a, res, img.Rgb24.width, img.Rgb24.height);
+    gauss_kernel#compile (~debug: true) !dev;
+    Spoc.Kernel.run !dev (block, grid) gauss_kernel (a, res, img.Rgb24.width, img.Rgb24.height);
     Pervasives.flush stdout;
   end;	
 
@@ -116,7 +115,7 @@ let _ =
 
 
 
-  let sortie = "/home/racha/Documents/stage/workflow_Canny/Output/output4.ppm" in
+  let sortie = "/home/racha/Documents/stage/workflow_Canny/Output/output1.ppm" in
 
   let ic1 = open_in file1 in
   let oc1 = open_out sortie in 
@@ -156,14 +155,16 @@ let _ =
      done;
      close_out oc1;
   *) 
-
-
   let oc = open_out "Erelation.txt" in
-  Printf.fprintf oc "ID;IMG1\n"(*;IMG2\n*);
+  Printf.fprintf oc "ID;IMG1\n";
   Printf.fprintf oc "%s;" id;
- (* Printf.fprintf oc "%s;" file1;*)
   Printf.fprintf oc "%s\n" sortie;
   close_out oc;
 
 
+  let oc = open_out "entre.txt" in
+  Printf.fprintf oc "ID;IMG1\n";
+  Printf.fprintf oc "%s;" id;
+  Printf.fprintf oc "%s\n" file1;
+  close_out oc;
 

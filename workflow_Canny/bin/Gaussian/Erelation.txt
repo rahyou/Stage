@@ -1,2 +1,2 @@
 ID;IMG1
-1;/home/racha/Documents/stage/workflow_Canny/Output/output2.ppm
+3;/home/racha/Documents/stage/workflow_Canny/Output/output1.ppm

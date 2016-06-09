@@ -1,10 +1,13 @@
+
+
+
 #use  "readppm.ml";
 (*let img = OImages.load file1 [] in                                          
   let w, h = OImages.size img in *)
 open Spoc
 open Images
 
-    kernel sobel_kernel : Spoc.Vector.vint32-> Spoc.Vector.vint32 -> Spoc.Vector.vfloat32 -> int -> int -> unit = "kernels/sobel_kernel" "sobel_kernel"
+    kernel gauss_kernel : Spoc.Vector.vint32-> Spoc.Vector.vint32 -> int -> int -> unit = "kernels/gaussian_kernel" "gauss_kernel"
 
 let devices = Spoc.Devices.init ()
 
@@ -41,12 +44,11 @@ let _ =
   Printf.printf "Will use simple precision\n"; 
 
 
-  let  a = Spoc.Vector.create Vector.int32 (img.Rgb24.height * img.Rgb24.width)
-  and  theta = Spoc.Vector.create Vector.float32 (img.Rgb24.height * img.Rgb24.width) 
+  let  a = Spoc.Vector.create Vector.int32 (img.Rgb24.height * img.Rgb24.width) 
   and res = Spoc.Vector.create Vector.int32 (img.Rgb24.height * img.Rgb24.width )  in
 
 
-  let sobel_kernel = sobel_kernel in  
+  let gauss_kernel = gauss_kernel in  
   let l = img.Rgb24.height in
   let c = img.Rgb24.width  in
   let f= ref 0 in
@@ -65,7 +67,6 @@ let _ =
       Printf.printf "Transfering Values (on Device memory)\n";
       flush stdout;
       Spoc.Mem.to_device a !dev;
-      Spoc.Mem.to_device theta !dev;
       Spoc.Mem.to_device res !dev;
     end;
   begin     
@@ -100,8 +101,8 @@ let _ =
      
 
     Printf.printf "compile \n";
-    sobel_kernel#compile (~debug: true) !dev;
-    Spoc.Kernel.run !dev (block, grid) sobel_kernel (a, res, theta, img.Rgb24.width, img.Rgb24.height);
+    gauss_kernel#compile (~debug: true) !dev;
+    Spoc.Kernel.run !dev (block, grid) gauss_kernel (a, res, img.Rgb24.width, img.Rgb24.height);
     Pervasives.flush stdout;
   end;	
 
@@ -115,7 +116,7 @@ let _ =
 
 
 
-  let sortie = "/home/racha/Documents/stage/workflow_Canny/Output/output2.ppm" in
+  let sortie = "/home/racha/Documents/stage/workflow_Canny/Output/output4.ppm" in
 
   let ic1 = open_in file1 in
   let oc1 = open_out sortie in 
@@ -155,20 +156,10 @@ let _ =
      done;
      close_out oc1;
   *) 
-  
-  let oc = open_out "/home/racha/Documents/stage/workflow_Canny/Output/theta.csv" in
-  Printf.fprintf oc "theta\n";
-   for t = 0 to (Spoc.Vector.length theta - 1) do
-       let c =  int_of_float(Spoc.Mem.get theta t)in
-     Printf.fprintf oc "%d\n" c;
-  done;
-  
-  
   let oc = open_out "Erelation.txt" in
-  Printf.fprintf oc "ID;IMG1;ANGLE\n";
+  Printf.fprintf oc "ID;IMG1\n";
   Printf.fprintf oc "%s;" id;
-  Printf.fprintf oc "%s" sortie;
-   Printf.fprintf oc "/home/racha/Documents/stage/workflow_Canny/Output/theta.csv\n" ;
+  Printf.fprintf oc "%s\n" sortie;
   close_out oc;
 
 

@@ -14,7 +14,7 @@ __constant int soby[3][3] = { {-1,-2,-1},
 // theta: angle output data  
 __kernel void sobel_kernel(__global int *data,
                            __global int *out,
-                             __global uchar *theta, 
+                             __global float *theta, 
                                    int rows,
                                     int img_height)
 {
@@ -34,7 +34,7 @@ int globale_taille = 512*512 -1;
  
  
 
-   // copy to local
+     // copy to local
     int pos00 = pos -img_height -1;
     
 if(pos00 >= 0 && pos00 <= globale_taille)
@@ -49,14 +49,14 @@ if(pos00 >= 0 && pos00 <= globale_taille)
        l_data[0][1] = 0;
 
 
-int pos02 = pos + img_height -1;
+int pos02 = pos - img_height +1;;//+ img_height -1;
 if(pos02 >= 0 && pos02 <= globale_taille)
    l_data[0][2] = data[pos + img_height -1]; 
 else
        l_data[0][2] = 0;
 
 
-int pos10 = pos - img_height ;
+int pos10 = pos-1; //- img_height ;
 if(pos10 >= 0 && pos10 <= globale_taille)
    l_data[1][0] = data[pos -img_height];
 else
@@ -69,19 +69,19 @@ if(pos11 >= 0 && pos11 <= globale_taille)
 else
        l_data[1][1] = 0;
 
-int pos12 = pos +img_height;
+int pos12 = pos +1; //+img_height;
 if(pos12 >= 0 && pos12 <= globale_taille)
 l_data[1][2] = data[pos +img_height];
 else
        l_data[1][2] = 0;
 
-int pos20 = pos - img_height +1;
+int pos20 = pos+ img_height -1;// - img_height +1;
 if(pos20 >= 0 && pos20 <= globale_taille)
    l_data[2][0] = data[pos - img_height +1];
 else
        l_data[2][0] = 0;
 
-int pos21 = pos + 1;
+int pos21 = pos + img_height;// + 1;
 if(pos21 >= 0 && pos21 <= globale_taille)
  l_data[2][1] = data[pos + 1 ];
 else
