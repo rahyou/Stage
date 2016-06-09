@@ -31,7 +31,7 @@ int pos =
 get_local_id (0) + (get_group_id(0) * get_local_size (0));
    const uchar EDGE = 255;
 
- /*   uchar magnitude = data[pos];
+    uchar magnitude = data[pos];
     
     if (magnitude >= highThresh)
         out[pos] = EDGE;
@@ -47,6 +47,7 @@ get_local_id (0) + (get_group_id(0) * get_local_size (0));
         else
              out[pos] =  out[pos] = 0;
     }
-*/
+
+
 
 }
