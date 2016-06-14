@@ -7,7 +7,7 @@
 open Spoc
 open Images
 
-    kernel gauss_kernel : Spoc.Vector.vint32-> Spoc.Vector.vint32 -> int -> int -> unit = "kernels/gaussian_kernel" "gauss_kernel"
+    kernel gauss_kernel : Spoc.Vector.vint32-> Spoc.Vector.vint32 -> int -> int -> unit = "kernels/hys_kernel" "hys_kernel"
 
 let devices = Spoc.Devices.init ()
 
@@ -24,7 +24,7 @@ let _ =
   Arg.parse ([]) (fun s -> files :=  s:: !files  ) "";
   Random.self_init();
   let args = List.rev !files in
-  let id, file1= match args with 
+  let id, file1 = match args with 
     | [id; file1] -> id, file1
     | _ -> failwith "args error"
   in
@@ -72,7 +72,7 @@ let _ =
   begin     
     Printf.printf "Computing \n";
     flush stdout;
-
+(*
 
     let threadsPerBlock = match !dev.Devices.specific_info with
       | Devices.OpenCLInfo clI ->
@@ -84,7 +84,7 @@ let _ =
     let blocksPerGrid = (img.Rgb24.width*img.Rgb24.height + threadsPerBlock -1) / threadsPerBlock in
     let block = { Spoc.Kernel.blockX = threadsPerBlock; Spoc.Kernel.blockY = 1 ; Spoc.Kernel.blockZ = 1;} in
     let grid = { Spoc.Kernel.gridX = blocksPerGrid; Spoc.Kernel.gridY = 1 ; Spoc.Kernel.gridZ = 1;} in	
-  (*  	 
+    *)	 
    	let threadsPerBlock = match !dev.Devices.specific_info with
              | Devices.OpenCLInfo clI -> 
                (match clI.Devices.device_type with
@@ -97,7 +97,7 @@ let _ =
  
       	let block = {Spoc.Kernel.blockX = threadsPerBlock; Spoc.Kernel.blockY = threadsPerBlock; Spoc.Kernel.blockZ = 1}
       	and grid= {Spoc.Kernel.gridX = blocksPerGridx;   Spoc.Kernel.gridY = blocksPerGridy; Spoc.Kernel.gridZ = 1} in
-*)
+
      
 
     Printf.printf "compile \n";
@@ -157,9 +157,10 @@ let _ =
      close_out oc1;
   *) 
   let oc = open_out "Erelation.txt" in
-  Printf.fprintf oc "ID;IMG1\n";
+  Printf.fprintf oc "ID;IMG1;\n";
   Printf.fprintf oc "%s;" id;
-  Printf.fprintf oc "%s\n" sortie;
+  Printf.fprintf oc "%s;" sortie;
+
   close_out oc;
 
 

@@ -16,9 +16,6 @@ let auto_transfers = ref false
 let verify = ref true
 let files = ref []
 let color = ref 0 
-let vec_size = ref (512 * 512)
-
-
 
 let _ =
   Arg.parse ([]) (fun s -> files :=  s:: !files  ) "";
@@ -52,8 +49,9 @@ let _ =
   let l = img.Rgb24.height in
   let c = img.Rgb24.width  in
   let f= ref 0 in
-  for j=0 to c-1 do
-    for i=0 to l-1 do  
+      for j=0 to c-1 do
+    for i=0 to l-1 do
+  
       let color = Rgb24.get img i j in
         Spoc.Mem.set a !f (Int32.of_int (read_ascii_24 color)) ;
       f := !f+1;
@@ -74,7 +72,7 @@ let _ =
     flush stdout;
 
 
-    let threadsPerBlock = match !dev.Devices.specific_info with
+ (*   let threadsPerBlock = match !dev.Devices.specific_info with
       | Devices.OpenCLInfo clI ->
         (match clI.Devices.device_type with
          | Devices.CL_DEVICE_TYPE_CPU -> 1 (*si c'est un cpu device renvoie 1 sinon _ pour tous les autres cas renvoie 256*)
@@ -84,7 +82,7 @@ let _ =
     let blocksPerGrid = (img.Rgb24.width*img.Rgb24.height + threadsPerBlock -1) / threadsPerBlock in
     let block = { Spoc.Kernel.blockX = threadsPerBlock; Spoc.Kernel.blockY = 1 ; Spoc.Kernel.blockZ = 1;} in
     let grid = { Spoc.Kernel.gridX = blocksPerGrid; Spoc.Kernel.gridY = 1 ; Spoc.Kernel.gridZ = 1;} in	
-  (*  	 
+ *)   	 
    	let threadsPerBlock = match !dev.Devices.specific_info with
              | Devices.OpenCLInfo clI -> 
                (match clI.Devices.device_type with
@@ -97,7 +95,7 @@ let _ =
  
       	let block = {Spoc.Kernel.blockX = threadsPerBlock; Spoc.Kernel.blockY = threadsPerBlock; Spoc.Kernel.blockZ = 1}
       	and grid= {Spoc.Kernel.gridX = blocksPerGridx;   Spoc.Kernel.gridY = blocksPerGridy; Spoc.Kernel.gridZ = 1} in
-*)
+
      
 
     Printf.printf "compile \n";

@@ -21,18 +21,22 @@
 			<relation reltype="Output" name="OAct3"/>
 			<field name="ID" type="float" output="OAct3" decimalplaces="0"/>
 			<field name="IMG1" type="text" output="OAct3"/>
+			<field name="ANGLE" type="text" output="OAct3"/>
+				
     	</activity>
 		<activity tag="act4" description="" type="MAP" activation="./experiment.cmd" template="%=WFDIR%/template_act4">
 			<relation reltype="Input" dependency="act3"/>
 			<relation reltype="Output" name="OAct4"/>
 			<field name="ID" type="float" output="OAct4" decimalplaces="0"/>
 			<field name="IMG1" type="text" output="OAct4"/>
+<field name="ANGLE" type="text" output="OAct4"/>
     	</activity>
-	<activity tag="act5" description="" type="MAP" activation="./experiment.cmd" template="%=WFDIR%/template_act4">
+	<activity tag="act5" description="" type="MAP" activation="./experiment.cmd" template="%=WFDIR%/template_act5">
 			<relation reltype="Input" dependency="act4"/>
 			<relation reltype="Output" name="OAct5"/>
-			<field name="ID" type="float" output="OAct5" decimalplaces="0"/>
+			<field name="ID" type="float"  output="OAct5" decimalplaces="0"/>
 			<field name="IMG1" type="text" output="OAct5"/>
+
     	</activity>
 	</conceptualWorkflow>
 	<executionWorkflow tag="workflow-map-canny" execmodel="DYN_FAF" expdir="%=WFDIR%/exp">

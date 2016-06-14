@@ -116,7 +116,7 @@ let parse_ints f =
     Printf.printf "Computing \n";
     flush stdout;
 
-
+(*
     let threadsPerBlock = match !dev.Devices.specific_info with
       | Devices.OpenCLInfo clI ->
         (match clI.Devices.device_type with
@@ -127,7 +127,7 @@ let parse_ints f =
     let blocksPerGrid = (img.Rgb24.width*img.Rgb24.height + threadsPerBlock -1) / threadsPerBlock in
     let block = { Spoc.Kernel.blockX = threadsPerBlock; Spoc.Kernel.blockY = 1 ; Spoc.Kernel.blockZ = 1;} in
     let grid = { Spoc.Kernel.gridX = blocksPerGrid; Spoc.Kernel.gridY = 1 ; Spoc.Kernel.gridZ = 1;} in	
-  (*  	 
+ *)   	 
    	let threadsPerBlock = match !dev.Devices.specific_info with
              | Devices.OpenCLInfo clI -> 
                (match clI.Devices.device_type with
@@ -141,7 +141,7 @@ let parse_ints f =
       	let block = {Spoc.Kernel.blockX = threadsPerBlock; Spoc.Kernel.blockY = threadsPerBlock; Spoc.Kernel.blockZ = 1}
       	and grid= {Spoc.Kernel.gridX = blocksPerGridx;   Spoc.Kernel.gridY = blocksPerGridy; Spoc.Kernel.gridZ = 1} in
 
-     *)
+     
 
     Printf.printf "compile \n";
     non_max#compile (~debug: true) !dev;
@@ -200,9 +200,10 @@ let parse_ints f =
      close_out oc1;
   *) 
   let oc = open_out "Erelation.txt" in
-  Printf.fprintf oc "ID;IMG1\n";
+  Printf.fprintf oc "ID;IMG1;ANGLE\n";
   Printf.fprintf oc "%s;" id;
-  Printf.fprintf oc "%s\n" sortie;
+  Printf.fprintf oc "%s;" sortie;
+   Printf.fprintf oc "/home/racha/Documents/stage/workflow_Canny/Output/theta.csv\n" ;
   close_out oc;
 
 

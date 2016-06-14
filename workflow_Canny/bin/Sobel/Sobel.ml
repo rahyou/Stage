@@ -4,7 +4,7 @@
 open Spoc
 open Images
 
-    kernel sobel_kernel : Spoc.Vector.vint32-> Spoc.Vector.vint32 -> Spoc.Vector.vfloat32 -> int -> int -> unit = "kernels/sobel_kernel" "sobel_kernel"
+    kernel sobel_kernel : Spoc.Vector.vfloat32-> Spoc.Vector.vfloat32 -> Spoc.Vector.vfloat32 -> int -> int -> unit = "kernels/sobel_kernel" "sobel_kernel"
 
 let devices = Spoc.Devices.init ()
 
@@ -33,7 +33,7 @@ let _ =
     let r = c.r in
     let g = c.g in
     let b = c.b in
-    (*float_of_int *)(r * 256 + g) * 256 + b;
+  (*  float_of_int*) (r * 256 + g) * 256 + b;
   in
   Spoc.Mem.auto_transfers !auto_transfers;
   Printf.printf "Will use device : %s\n" (!dev).Spoc.Devices.general_info.Spoc.Devices.name;
@@ -41,9 +41,9 @@ let _ =
   Printf.printf "Will use simple precision\n"; 
 
 
-  let  a = Spoc.Vector.create Vector.int32 (img.Rgb24.height * img.Rgb24.width)
+  let  a = Spoc.Vector.create Vector.float32 (img.Rgb24.height * img.Rgb24.width)
   and  theta = Spoc.Vector.create Vector.float32 (img.Rgb24.height * img.Rgb24.width) 
-  and res = Spoc.Vector.create Vector.int32 (img.Rgb24.height * img.Rgb24.width )  in
+  and res = Spoc.Vector.create Vector.float32 (img.Rgb24.height * img.Rgb24.width )  in
 
 
   let sobel_kernel = sobel_kernel in  
@@ -53,7 +53,7 @@ let _ =
   for j=0 to c-1 do
     for i=0 to l-1 do  
       let color = Rgb24.get img i j in
-        Spoc.Mem.set a !f (Int32.of_int (read_ascii_24 color)) ;
+        Spoc.Mem.set a !f (float_of_int(read_ascii_24 color)) ;
         Spoc.Mem.set theta !f 90.0; 
       f := !f+1;
     done;
@@ -73,7 +73,7 @@ let _ =
     Printf.printf "Computing \n";
     flush stdout;
 
-
+(*
     let threadsPerBlock = match !dev.Devices.specific_info with
       | Devices.OpenCLInfo clI ->
         (match clI.Devices.device_type with
@@ -84,7 +84,7 @@ let _ =
     let blocksPerGrid = (img.Rgb24.width*img.Rgb24.height + threadsPerBlock -1) / threadsPerBlock in
     let block = { Spoc.Kernel.blockX = threadsPerBlock; Spoc.Kernel.blockY = 1 ; Spoc.Kernel.blockZ = 1;} in
     let grid = { Spoc.Kernel.gridX = blocksPerGrid; Spoc.Kernel.gridY = 1 ; Spoc.Kernel.gridZ = 1;} in	
-  (*  	 
+   *) 	 
    	let threadsPerBlock = match !dev.Devices.specific_info with
              | Devices.OpenCLInfo clI -> 
                (match clI.Devices.device_type with
@@ -97,7 +97,7 @@ let _ =
  
       	let block = {Spoc.Kernel.blockX = threadsPerBlock; Spoc.Kernel.blockY = threadsPerBlock; Spoc.Kernel.blockZ = 1}
       	and grid= {Spoc.Kernel.gridX = blocksPerGridx;   Spoc.Kernel.gridY = blocksPerGridy; Spoc.Kernel.gridZ = 1} in
-*)
+
      
 
     Printf.printf "compile \n";
@@ -132,8 +132,9 @@ let _ =
  
 
   for t = 0 to (Spoc.Vector.length res - 1) do
-       let c =  Int32.to_int(Spoc.Mem.get res t)in
-  let r = c / 65536  and  g = c / 256 mod 256  and  b = c mod 256  in
+       let c =  Spoc.Mem.get res t in
+  let r = int_of_float c / 65536  and  g = int_of_float c / 256 mod 256  and  b = int_of_float c mod 256  in
+  (*Printf.fprintf oc1 "%.3f " r; Printf.fprintf oc1 "%d " g; id; Printf.fprintf oc1 "%d " b;*)
     output_byte oc1 r; output_byte oc1 g; output_byte oc1 b;
   done;
 
@@ -164,12 +165,11 @@ let _ =
        let c =  int_of_float(Spoc.Mem.get theta t)in
      Printf.fprintf oc "%d\n" c;
   done;
-  
-  
+
   let oc = open_out "Erelation.txt" in
   Printf.fprintf oc "ID;IMG1;ANGLE\n";
   Printf.fprintf oc "%s;" id;
-  Printf.fprintf oc "%s" sortie;
+  Printf.fprintf oc "%s;" sortie;
    Printf.fprintf oc "/home/racha/Documents/stage/workflow_Canny/Output/theta.csv\n" ;
   close_out oc;
 

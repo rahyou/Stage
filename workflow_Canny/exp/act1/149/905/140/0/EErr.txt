@@ -1,0 +1,2 @@
+Fatal error: exception Failure("args error        ")
+cp: impossible d'évaluer «output.ppm»: Aucun fichier ou dossier de ce type

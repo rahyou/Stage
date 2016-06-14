@@ -1,6 +1,4 @@
-
-cd ~/Documents/stage/workflow_Canny/bin/Hyst
- ./Hyst.byte "%=ID%" "%=IMG1%" 
-cp output.ppm ~/Documents/stage/workflow_Canny/Output
+cd ~/Documents/stage/workflow_Canny/bin/hys
+ ./hys.byte "%=ID%" "%=IMG1%" 
 cat Erelation.txt > $OLDPWD/ERelation.txt
 
