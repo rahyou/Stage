@@ -4,14 +4,6 @@
 #pragma OPENCL EXTENSION cl_amd_fp64 : enable
 #endif
 
- 
-/*__constant float gaus[3][3] = { {0.0625, 0.125, 0.0625},
-                                {0.1250, 0.250, 0.1250},
-                                {0.0625, 0.125, 0.0625} };*/
-
-__constant float gaus[3][3] = { {1, 1, 1},
-                                {1, 1, 1},
-                                {1, 1, 1} };
 
 #define L_SIZE 16
 
