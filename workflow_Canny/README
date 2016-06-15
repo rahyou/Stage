@@ -1,7 +1,6 @@
 === DESCRIPTION ============================================================
-This directory contains a workflow example using Chiron. One of the three 
-workflow activities corresponds to the invocation of a SPOC application, 
-which users can switch to execute in CPU or GPU.
+This directory contains a workflow example using Chiron. Each of the three 
+workflow activities corresponds to an invocation of a SPOC application.
 
 === SOFTWARE REQUIREMENTS ============================================================
 This workflow execution have the following software requirements:
@@ -11,7 +10,7 @@ This workflow execution have the following software requirements:
 === ENVIRONMENT CONFIGURATION ============================================================
 To use these softwares correctly in this workflow, please configure them as follows:
 1) Configuration of a relational database using Postgres DBMS.
-2) Compilation of the SPOC application code (i.e., CustomPi application).
+2) Compilation of the SPOC application code.
 3) Configuration of the file "input.dataset" in directory "exp", which represents the input
 relation from this workflow using Chiron.
 
@@ -21,7 +20,7 @@ Chiron. This SQL script is named as "chiron-database.sql" in directory "bin"
 
 Obs(2): To compile SPOC application code, please access the directory of this 
 application and execute make command in Linux-based operating system, as follows:
-$ cd bin/CustomPi
+$ cd bin/app-directory
 $ make clean
 $ make
 
@@ -38,7 +37,3 @@ directory. The second script executes ChironSetup in order to update the concept
 database. The third script invokes ChironCore to execute the workflow considering the conceptual 
 definition in Postgres's relational database.
 
-=== CONFIGURATION OF SPOC APPLICATION ============================================================
-To define the most suitable computing resource (CPU or GPU) to execute SPOC application, you can 
-change the command line in "experiment.cmd" file. Since the command lines (for CPU and GPU) are already there, you 
-just need to comment or uncomment invocations for a specific computing resource.
