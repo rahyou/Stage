@@ -1,0 +1,39 @@
+
+\chapter{Contexte et objectifs}
+Ce chapitre décrit le contexte du stage, ces objectifs, ainsi que son plan général.
+\section{Contexte}
+\label{p2}
+Les simulations à grande échelle que l’on rencontre en calculs numériques sont difficiles à gérer. Cela provient de leur nature exploratoire qui nécessite d’évaluer un grand nombre de combinaisons de paramètres, le tout en lançant de nombreuses tâches en parallèle. Les SWfMS ont démontré leurs capacités dans différents domaines scientifiques comme l'astronomie et le biologie \cite{oli}, \cite{dia}, orchestrant la parallélisation des activités de flux de travail \cite{bux}. La programmation GPGPU présente une solution très intéressante dans la parallélisation des milliers d'activités indépendantes, comme dans les opérations de MapReduce. Cependant, il y a plusieurs défis ouverts dans l'exploration des différents modèles de parallélisme pendant l'exécution du flux de travail. Parmi les défis à relever, on s'intéresse ici au problème de l'optimisation de la planification d'exécutions parallèles, laquelle doit tirer profit des architectures hétérogènes (multi-c{\oe}urs, accélérateurs). Par exemple la programmation des cartes graphiques demande un couplage fort entre les unités de calculs parallèles du GPU avec le CPU pour obtenir de bonnes performances, en particulier sur le transfert de données. Les systèmes hétérogènes nécessitent des conceptions complexes combinant différents paradigmes de programmation pour gérer chaque matériel de manière spécifique. 
+
+%Solution SPOC
+On cherche alors à abaisser cette complexité dans les flux de travail pour calculs numériques parallèles en utilisant des abstractions de flux de données et des constructions de haut niveau de programmation parallèle pour représenter la spécification du flux de travail et permettre d'optimiser le plan d'exécution parallèle.
+ % tout en profitant des différentes architectures multi-core.
+
+%However, there are several open challenges in exploring different models of parallelism during the workflow execution. Among the challenges are: optimizations in parallel execution plan derivation, while taking advantage of different multi-core architectures. 
+
+%Hardware solutions that use graphic processors, such as NVIDIA’s K20, and also
+
+%CHIRON PROBLÈMES % le défits
+
+\vspace{0.5cm}
+\section{Objectifs}
+
+
+
+ %dans les environnements de calcul haute performence HPC, afin d'éxecuter les simulations à grande échelle de calculs numériques sur les cartes graphiques GPUs.
+%l'objective c'est de réaliser un sous chiron de tel facon  
+
+Dans ce projet nous visons à aborder l'efficacité dans l'exécution parallèle d'un flux de travail de calcul numérique. En laissant plus d'espace au moteur de gestion de flux de travail pour prendre les décisions sur les choix des plans d'exécutions. %Ce projet innove en utilisant deux abstractions originales et complémentaires pour répondre aux différents niveaux de parallélisme dans les exécutions de workflow scientifiques. On se concentre sur le parallélisme de données (groupe brésilien) et le traitement du langage parallèle (groupe français). 
+Ce travail en commun contribue en combinant les abstractions de programmation de différents niveaux, à savoir au niveau de la langage de spécification de flux de travail (groupe brésilien) et au niveau de la programmation parallèle (groupe français). la sémantique des opérations algébriques fournit l'exécution en parallèle en mappant de la langue de flux de travail vers des expressions algébriques équivalentes, nous prévoyons que l'expression peut encore être mise en correspondance avec des abstractions de SPOC. De cette façon, le mapping vers SPOC profitera de la sémantique des opérateurs algébriques. Par exemple, en fonction de l'exécution d'un Map, un Réduce, un Filter ou d'autres ensembles des opérations la meilleure abstraction parallèle est choisie pour être mise en correspondance avec le matériel parallèle spécifique.
+%Le concept principal derrière cette optimisation provient de deux abstrations de programmation
+%L'abstraction de la programmation parallèle est fournie avec l'environnement SPOC (voir Annexe \ref{chiron}), 
+L'objectif est donc de combiner la sémantique des opérations algébriques de dataflow, comme celles proposées dans le système Chiron, avec la puissance de construction de composition de squelettes SPOC pour obtenir la génération dynamique de l'ordonnancement des exécutions parallèles. 
+Cette combinaison, en plus d'être complémentaire, est originale dans le cadre de flux de travail pour calculs numériques. Ensemble, ils ont le potentiel d'isoler le matériel et la programmation de bas niveau de la spécification de haut niveau du flux de travail. Les abstractions prévoient également l'application des règles d'optimisation génériques.
+
+%On s'intéresse à Chiron (voir Annexe \ref{chiron}) comme un moteur d'exécution de flux de travail. 
+Il existe plusieurs encapsulations de Chiron  (voir Annexe \ref{chiron}) dans des différents domaines (Clusters, Cloud-based..). Nous visons à développer une nouvelle encapsulation de Chiron qui supporte l'accélération GPU pour l'exécution parallèle de workflow. Le traitement parallèle dans Chiron est obtenu dans un style MapReduce (Hadoop). La flexibilité amenée par ce concept algébrique nous permet d'utiliser un mode d'activation d'activité qui nous permet d'ordonnancer dynamiquement le flux de travail et de l'optimiser. Dans ce mode les activités des flux de travail sont présentées par des activations (des programmes informatiques externes) \cite{oga13}. On cherche dans un première temps à déployer ces activations en parallèle sur le GPU, et à étudier l'algorithme de l'optimisation et de la planification d'exécution parallèle de ces activations, à cause de la grande taille des données analysées, et l'intensité du calcul, la deuxième étape sera d'effectuer cette exécution parallèle sur plusieurs GPUs.  
+%effectuer une comparaison pour voir la rentabilité en terme de pErformance coup et temps 
+Une étape envisagée en fonction de l'avancement du stage sera d'étudier la possibilité de parallélisation des fonctionnalités de Chiron, l'objectif sera de combiner les fonctionnalités de Chiron et celles de SPOC dans une nouvelle extension de Chiron pour l'environnement HPC. 
+
+%\vspace{0.5cm}
+%
