@@ -2,3 +2,9 @@ bin/*
 *.cmi
 *.cmo
 *~
+*/Racha_Ahmad_pre-rapport.aux
+*/Racha_Ahmad_pre-rapport.log
+*/Racha_Ahmad_pre-rapport.mt*
+*/Racha_Ahmad_pre-rapport.out
+*/Racha_Ahmad_pre-rapport.toc
+.*
