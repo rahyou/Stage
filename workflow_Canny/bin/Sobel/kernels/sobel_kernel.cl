@@ -69,12 +69,15 @@ size_t pos = g_col * rows + g_row;
 
     barrier(CLK_LOCAL_MEM_FENCE);
 
-    float sumx = 0, sumy = 0, angle = 0;
+    float sumx = 0, sumy = 0, angle = 0, max = 0;
     // find x and y derivatives
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)
         {
+		if ( max < l_data[i+l_row-1][j+l_col-1] )
+			max = l_data[i+l_row-1][j+l_col-1];
+
             sumx += sobx[i][j] * l_data[i+l_row-1][j+l_col-1];
             sumy += soby[i][j] * l_data[i+l_row-1][j+l_col-1];
         }
@@ -84,8 +87,20 @@ size_t pos = g_col * rows + g_row;
     // The output is now the square root of their squares, but they are
     // constrained to 0 <= value <= 255. Note that hypot is a built in function
     // defined as: hypot(x,y) = sqrt(x*x, y*y).
-    out[pos]  = (int)hypot(sumx,sumy) ;
+    
+ 	short Sum = ((abs((int)sumx )+abs((int)sumy)));
+ int hyp = (int)hypot(sumx,sumy) ;
 
+   // if (hyp > 0)
+   // {
+    //    out[pos]= hyp;
+   // }
+   // else
+ if (hyp > max)
+    {
+        out[pos]= hyp;
+    }
+else  out[pos]  =  0  ;
     // Compute the direction angle theta in radians
     // atan2 has a range of (-PI, PI) degrees
     angle = atan2(sumy,sumx);
