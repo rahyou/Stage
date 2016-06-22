@@ -1,3 +1,0 @@
-- Il soit meilleure que l'image reste sur le gpu pendant le traitement.Cette implimentation de Canny ajoute boucoup des transferts.
-
-- qd on change la taille des threadperblock à 32 ou + aulieu de 16 ça fait une exception.

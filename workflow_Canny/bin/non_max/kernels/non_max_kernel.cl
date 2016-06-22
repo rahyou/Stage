@@ -20,13 +20,12 @@ __kernel void non_max(__global int *data,
 
     // These variables are offset by one to avoid seg. fault errors
     // As such, this kernel ignores the outside ring of pixels
-    int g_row = get_local_id (1) + (get_group_id(1) * get_local_size (1));	
+int g_row = get_local_id (1) + (get_group_id(1) * get_local_size (1));	
 int g_col = get_local_id (0) + (get_group_id(0) * get_local_size (0));
-int pos = g_col * rows + g_row;
+int pos = g_col * cols + g_row;
 
-    size_t l_row = get_local_id(0) + 1;
-    size_t l_col = get_local_id(1) + 1;
-out[pos] = data [pos];
+size_t l_row = get_local_id(0) + 1;
+size_t l_col = get_local_id(1) + 1;
 
  
     __local int l_data[18][18];

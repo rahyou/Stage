@@ -5,22 +5,22 @@ extern "C" {
 // data: image input data with each pixel taking up 1 byte (8Bit 1Channel)
 // out: image output data (8B1C)
 // theta: angle input data
-__kernel void non_max_supp_kernel(__global uchar *data,
-                                  __global uchar *out,
-                                  __global uchar *theta,
-                                           size_t rows,
-                                           size_t cols)
+__global__ void non_max_supp_kernel(int *data,
+                                  int *out,
+                                   int *theta,
+                                           int rows,
+                                          int cols)
 {
     // These variables are offset by one to avoid seg. fault errors
     // As such, this kernel ignores the outside ring of pixels
     int l_row = threadIdx.y + 1 ;
 	int l_col = threadIdx.x + 1;
-	int g_row = threadIdx.y + (blockIdx.y * blockDim.y);;
-	int g_col = threadIdx.x + (blockIdx.x * blockDim.x);;
+	int g_row = threadIdx.y + (blockIdx.y * blockDim.y);
+	int g_col = threadIdx.x + (blockIdx.x * blockDim.x);
 
     int pos = g_row * cols + g_col;
    
- __local int l_data[18][18];
+ __shared__ int l_data[18][18];
 
     // copy to l_data
     l_data[l_row][l_col] = data[pos];
@@ -55,9 +55,7 @@ __kernel void non_max_supp_kernel(__global uchar *data,
     else if (l_col == 16)
         l_data[l_row][17] = data[pos+1];
 
-    barrier(CLK_LOCAL_MEM_FENCE);
-
-    uchar my_magnitude = l_data[l_row][l_col];
+    int my_magnitude = l_data[l_row][l_col];
 
     // The following variables are used to address the matrices more easily
     switch (theta[pos])

@@ -17,12 +17,12 @@ int spoc_xor (int a, int b ) { return (a^b);}
 
 /************* FUNCTION PROTOTYPES ******************/
 /************* FUNCTION DEFINITIONS ******************/
-__kernel void spoc_dummy ( __global int* v ) {
+__kernel void spoc_dummy ( __global int* v, int w, int h ) {
   int tid;
   int i;
   int res;
   tid = (get_local_id (0)) + (get_local_size (0)) * (get_group_id (0)) ;
-  if (tid <= 512 * 512){
+  if (tid <= w * h){
     i = tid * 3 ;
     res = (int) (0.21f * (float) (v[i])  + 0.71f * (float) (v[i + 1])  + 0.07f * (float) (v[i + 2]) )  ;
     v[i] = res; ;

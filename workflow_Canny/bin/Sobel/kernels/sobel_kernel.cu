@@ -1,7 +1,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ __constant__ int sobx[3][3] = { {-1, 0, 1},
+                              {-2, 0, 2},
+                              {-1, 0, 1} };
 
+__constant__  int soby[3][3] = { {-1,-2,-1},
+                              { 0, 0, 0},
+                              { 1, 2, 1} };
 
 // Sobel kernel. Apply sobx and soby separately, then find the sqrt of their
 //               squares.
@@ -14,17 +20,11 @@ __global__ void sobel_kernel( int *data,
                                    int rows,
                                     int cols)
 {// Some of the available convolution kernels
- int sobx[3][3] = { {-1, 0, 1},
-                              {-2, 0, 2},
-                              {-1, 0, 1} };
 
- int soby[3][3] = { {-1,-2,-1},
-                              { 0, 0, 0},
-                              { 1, 2, 1} };
     // collect sums separately. we're storing them into floats because that
     // is what hypot and atan2 will expect.
     const float PI = 3.14159265;
-   int l_row = threadIdx.y + 1;
+  	int l_row = threadIdx.y + 1;
 	int l_col = threadIdx.x + 1;
 
     
@@ -33,7 +33,7 @@ __global__ void sobel_kernel( int *data,
 
     int pos = g_row * cols + g_col;
     
-    __local int l_data[18][18];
+    __shared__ int l_data[18][18];
 
     // copy to local
     l_data[l_row][l_col] = data[pos];
@@ -70,7 +70,6 @@ __global__ void sobel_kernel( int *data,
     else if (l_col == 16)
         l_data[l_row][17] = data[pos+1];
 
-    barrier(CLK_LOCAL_MEM_FENCE);
 
     float sumx = 0, sumy = 0, angle = 0;
     // find x and y derivatives
@@ -102,7 +101,7 @@ __global__ void sobel_kernel( int *data,
 
     // Round the angle to one of four possibilities: 0, 45, 90, 135 degrees
     // then store it in the theta buffer at the proper position
-    theta[pos] = ((int)(degrees(angle * (PI/8) + PI/8-0.0001) / 45) * 45) % 180;
+    theta[pos] = ((int)(57.29577951 * (angle * (PI/8) + PI/8-0.0001) / 45) * 45) % 180;
 }
 #ifdef __cplusplus
 }

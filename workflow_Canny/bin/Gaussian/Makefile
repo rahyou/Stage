@@ -1,7 +1,7 @@
 DIR=$(notdir $(CURDIR))
 KERNEL_DIR = ./kernels
 PACKAGES=spoc,camlimages
-KERNELSSRC = $(KERNEL_DIR)/*.cl
+KERNELSSRC = $(KERNEL_DIR)/gaussian_kernels.cl
 NVCC = nvcc 
 NVCCCFLAGS = -m64 -O3 -g -ptx 
 SYNTAX_PACKAGES=spoc_external_kernels,sarek_syntax
@@ -27,8 +27,6 @@ $(BYTE) : $(MLSRC)
 %ptx: %cl
 	$(NVCC) $(NVCCCFLAGS) $(NVCC_INCLUDES) -o $@ $<
 
-%.o : %.c
-	$(CC) -c $< -I `ocamlfind ocamlc -where`
 
 clean:
 	rm -rf *.o *.cm* *.a *.cmxa *~ *.exe *.nat *.byte *.obj *.asm kernels/*.ptx

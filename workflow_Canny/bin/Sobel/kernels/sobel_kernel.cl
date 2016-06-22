@@ -24,7 +24,7 @@ __kernel void sobel_kernel(__global float *data,
     const float PI = 3.14;
 int g_row = get_local_id (1) + (get_group_id(1) * get_local_size (1));	
 int g_col = get_local_id (0) + (get_group_id(0) * get_local_size (0));
-size_t pos = g_col * rows + g_row;
+size_t pos = g_col * cols + g_row;
 
     size_t l_row = get_local_id(0) + 1;
     size_t l_col = get_local_id(1) + 1;
@@ -119,72 +119,3 @@ theta[pos]=((int)(degrees(angle * (PI/8) + PI/8-0.0001) / 45) * 45) % 180;
 }
     
  
-/*    
-   int pos = get_local_id (0) + (get_group_id(0) * get_local_size (0));
-
-__local int l_data[3][3];
-int sum=0;
-int globale_taille = 512*512 -1;
- 
-     // copy to local
-    int pos00 = pos -img_height -1;
-    
-if(pos00 >= 0 && pos00 <= globale_taille)
-       l_data[0][0] = data[pos00];
-    else
-       l_data[0][0] = 0;
-
-    int pos01 = pos - 1;
-    if(pos01 >= 0 && pos01 <= globale_taille)
-      l_data[0][1] = data[pos01];
-    else
-       l_data[0][1] = 0;
-
-
-int pos02 = pos - img_height +1;;//+ img_height -1;
-if(pos02 >= 0 && pos02 <= globale_taille)
-   l_data[0][2] = data[pos + img_height -1]; 
-else
-       l_data[0][2] = 0;
-
-
-int pos10 = pos-1; //- img_height ;
-if(pos10 >= 0 && pos10 <= globale_taille)
-   l_data[1][0] = data[pos -img_height];
-else
-       l_data[1][0] = 0;
-
-
-int pos11 = pos;
-if(pos11 >= 0 && pos11 <= globale_taille)
- l_data[1][1] = data[pos ];
-else
-       l_data[1][1] = 0;
-
-int pos12 = pos +1; //+img_height;
-if(pos12 >= 0 && pos12 <= globale_taille)
-l_data[1][2] = data[pos +img_height];
-else
-       l_data[1][2] = 0;
-
-int pos20 = pos+ img_height -1;// - img_height +1;
-if(pos20 >= 0 && pos20 <= globale_taille)
-   l_data[2][0] = data[pos - img_height +1];
-else
-       l_data[2][0] = 0;
-
-int pos21 = pos + img_height;// + 1;
-if(pos21 >= 0 && pos21 <= globale_taille)
- l_data[2][1] = data[pos + 1 ];
-else
-       l_data[2][1] = 0;
-
-int pos22 = pos + img_height +1;
-if(pos22 >= 0 && pos22 <= globale_taille)
-l_data[2][2] = data[pos + img_height +1];
-else
-       l_data[2][2] = 0;
-
-   // barrier(CLK_LOCAL_MEM_FENCE);
-*/
-   
