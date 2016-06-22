@@ -5,23 +5,21 @@
 	<database name="chiron" username="chiron" password="chiron" port="5433" server="localhost"/>
 	<conceptualWorkflow tag="workflow-query" description="">
 	    	
-    		<Activity tag="Ex3Act1" description="" type="Filter" activation="./experiment.cmd;./extractor.cmd" template="%=WFDIR%/template_act1">
-			
-			<relation reltype="Input" name="IAct1"/>
-			<relation reltype="Output" name="OAct1" />
-        <field name="ID" type="float" input="IAct1" output="OAct1" decimalplaces="0"/>
-			<field name="FILE1" type="file" input="IAct1" output="OAct1">
+    	<Activity tag="Ex3Act1" description="" type="Filter" activation="./experiment.cmd;./extractor.cmd"
+    		template="%=WFDIR%/template_act1">
+		<relation reltype="Input" name="IAct1"/>
+		<relation reltype="Output" name="OAct1" />
+       		<field name="ID" type="float" input="IAct1" output="OAct1" decimalplaces="0"/>
+       		<field name="FILE1" type="file" input="IAct1" output="OAct1">
 			<field name="V" type="float"  output="OAct1" decimalplaces="0"/>
-			</field>
-			<field name="FILE2" type="file" input="IAct1" output="OAct1">
+		</field>
+		<field name="FILE2" type="file" input="IAct1" output="OAct1">
 			<field name="K" type="float"  output="OAct1" decimalplaces="0"/>
-			</field>
-	<field name="FILE3" type="file"  output="OAct1"/>
+		</field>
+		<field name="FILE3" type="file"  output="OAct1"/>
         </Activity>
 		
-		
 	</conceptualWorkflow>
-	
 	
 	<executionWorkflow tag="workflow-query" execmodel="DYN_FAF" expdir="%=WFDIR%/exp">
 		<relation name="IAct1" filename="input.dataset"/>
