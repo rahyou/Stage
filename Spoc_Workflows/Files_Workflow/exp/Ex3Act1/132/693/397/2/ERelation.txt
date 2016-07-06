@@ -1,0 +1,2 @@
+ID;FILE1;FILE2;FILE3
+4;file-1.csv;file-2.csv;Sortie4.csv

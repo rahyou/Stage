@@ -1,0 +1,8 @@
+Will use device : Quadro 1000M
+Will use simple precision
+end of fileFin
+Transfering Values (on Device memory)
+Computing 
+compile 
+Transfering Vectors (on CPU memory)
+ 

@@ -1,0 +1,1 @@
+java -jar bin/ChironCore-2.0.jar SC.xml

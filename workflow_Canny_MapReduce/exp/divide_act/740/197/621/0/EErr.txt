@@ -1,0 +1,3 @@
+./experiment.cmd: ligne 4 : cd: /home/racha/Documents/stage/workflow_Canny_Reduce/bin/divide: Aucun fichier ou dossier de ce type
+./experiment.cmd: ligne 5: ./divide.byte: Aucun fichier ou dossier de ce type
+./experiment.cmd: ligne 7: /ERelation.txt: Permission non accordée

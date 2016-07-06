@@ -1,0 +1,30 @@
+<SciCumulus>
+	<environment type="LOCAL" verbose="true"/>
+	<constraint workflow_exectag="workflow-splitmap-gpu-1" cores="2" performance="false"/>
+	<workspace workflow_dir="/home/racha/Documents/stage/workflow_Can"/>
+	<database name="scc2" username="scc2" password="scc2" port="5433" server="localhost"/>
+	<conceptualWorkflow tag="workflow-D" description="">
+		
+		<activity constrained="false" tag="act1" description="" type="SPLIT_MAP" activation="./experiment.cmd" template="%=WFDIR%/template_act1">
+			<relation reltype="Input" name="IAct1"/>
+			<relation reltype="Output" name="OAct1" />
+			
+			<field name="ID" type="float" input="IAct1" output="OAct1" decimalplaces="0"/>
+			<field name="IMG1" type="text" input="IAct1" output="OAct1"/>
+		
+    	</activity>
+    	
+	
+    		<activity tag="act7" description="" type="REDUCE" operand="ID" activation=" ./experiment.cmd;./reassemble.byte oact1 " template="%=WFDIR%/bin/rassemble">
+			<relation reltype="Input" dependency="act1"/>
+			<relation reltype="Output" name="OAct7"/>
+			
+			<field name="ID" type="float"  output="OAct7" decimalplaces="0"/>
+			<field name="IMG1" type="text" output="OAct7"/>
+    	</activity>
+	</conceptualWorkflow>
+	
+	<executionWorkflow tag="workflow-D" execmodel="DYN_FAF" expdir="%=WFDIR%/exp">
+		<relation name="IAct1" filename="input.dataset"/>
+	</executionWorkflow>
+</SciCumulus>

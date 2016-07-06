@@ -1,2 +1,0 @@
-ID;IMG1;ANGLE
-1;/home/racha/Documents/stage/workflow_Canny/Output/output_2.ppm;/home/racha/Documents/stage/workflow_Canny/Output/theta.csv

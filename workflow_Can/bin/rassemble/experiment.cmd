@@ -1,0 +1,2 @@
+touch .depend
+make

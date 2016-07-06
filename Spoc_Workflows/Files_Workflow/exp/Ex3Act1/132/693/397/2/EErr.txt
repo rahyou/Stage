@@ -1,0 +1,4 @@
+Fatal error: exception OpenCL.OPENCL_ERROR_UNKNOWN
+cp: impossible d'évaluer «*.csv»: Aucun fichier ou dossier de ce type
+cp: impossible d'évaluer «*.csv»: Aucun fichier ou dossier de ce type
+rm: impossible de supprimer «*.csv»: Aucun fichier ou dossier de ce type

@@ -1,3 +1,0 @@
-CPU Computation : PI = 1570699/2000000 = 3.141398
-Will use device : Quadro 1000M
-GPU Computation : PI = 1569966/2000000 = 3.139932

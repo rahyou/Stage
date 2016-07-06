@@ -1,0 +1,2 @@
+ID;IMG1;
+1;/home/racha/Documents/stage/workflow_Canny_Reduce/Output/1/2/Hysteresis.ppm;

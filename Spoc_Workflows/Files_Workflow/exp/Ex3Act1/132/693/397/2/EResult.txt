@@ -1,0 +1,78 @@
+Will use device : Quadro 1000M
+Will use simple precision
+Allocating Vectors (on CPU memory)
+Transfering Values (on Device memory)
+Computing 
+ <kernel>:18:9: error: variable has address space that is not supported in program scope declaration
+    int sum = 0;
+        ^
+<kernel>:18:9: error: global variables must have a constant address space qualifier
+<kernel>:24:9: error: variable has address space that is not supported in program scope declaration
+    int pos = get_local_id(0) + 1; //g_row * cols + g_col;
+        ^
+<kernel>:24:9: error: global variables must have a constant address space qualifier
+<kernel>:26:24: error: use of undeclared identifier 'L_SIZE'
+    __local int l_data[L_SIZE+2][L_SIZE+2];
+                       ^
+<kernel>:26:34: error: use of undeclared identifier 'L_SIZE'
+    __local int l_data[L_SIZE+2][L_SIZE+2];
+                                 ^
+<kernel>:26:17: error: variable has address space that is not supported in program scope declaration
+    __local int l_data[L_SIZE+2][L_SIZE+2];
+                ^
+<kernel>:29:12: error: use of undeclared identifier 'l_row'
+    l_data[l_row][l_col] = data[pos];
+           ^
+<kernel>:29:19: error: use of undeclared identifier 'l_col'
+    l_data[l_row][l_col] = data[pos];
+                  ^
+<kernel>:29:5: warning: type specifier missing, defaults to 'int'
+    l_data[l_row][l_col] = data[pos];
+    ^~~~~~
+<kernel>:29:5: error: variable has address space that is not supported in program scope declaration
+<kernel>:29:28: error: use of undeclared identifier 'data'
+    l_data[l_row][l_col] = data[pos];
+                           ^
+<kernel>:32:5: error: expected identifier or '('
+    if (l_row == 1)
+    ^
+<kernel>:44:5: error: expected identifier or '('
+    else if (l_row == L_SIZE)
+    ^
+<kernel>:56:5: error: expected identifier or '('
+    if (l_col == 1)
+    ^
+<kernel>:58:5: error: expected identifier or '('
+    else if (l_col == L_SIZE)
+    ^
+<kernel>:61:13: error: expected ')'
+    barrier(CLK_LOCAL_MEM_FENCE);
+            ^
+cl_kernel.h:385:34: note: expanded from macro 'CLK_LOCAL_MEM_FENCE'
+#define CLK_LOCAL_MEM_FENCE     (1 << 0)    
+                                 ^
+<kernel>:61:13: note: to match this '('
+cl_kernel.h:385:33: note: expanded from macro 'CLK_LOCAL_MEM_FENCE'
+#define CLK_LOCAL_MEM_FENCE     (1 << 0)    
+                                ^
+<kernel>:61:13: warning: type specifier missing, defaults to 'int'
+    barrier(CLK_LOCAL_MEM_FENCE);
+            ^~~~~~~~~~~~~~~~~~~
+cl_kernel.h:385:34: note: expanded from macro 'CLK_LOCAL_MEM_FENCE'
+#define CLK_LOCAL_MEM_FENCE     (1 << 0)    
+                                ~^
+<kernel>:61:5: warning: type specifier missing, defaults to 'int'
+    barrier(CLK_LOCAL_MEM_FENCE);
+    ^~~~~~~
+<kernel>:61:5: error: conflicting types for 'barrier'
+cl_kernel.h:3847:7: note: previous declaration is here
+void  barrier(cl_mem_fence_flags);
+      ^
+<kernel>:63:5: error: expected identifier or '('
+    for (int i = 0; i < 3; i++)
+    ^
+<kernel>:67:5: warning: type specifier missing, defaults to 'int'
+    out[pos] = min(255,max(0,sum)); 
+    ^~~
+<kernel>:67:5: error: variable has address space that is not supported in program scope declaration
+IN: spoc_debug_opencl_compile@ 119

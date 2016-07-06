@@ -1,0 +1,70 @@
+<SciCumulus>
+	<environment type="LOCAL" verbose="true"/>
+	<constraint workflow_exectag="workflow-reduce-gpu-1" cores="2" performance="false"/>
+	<workspace workflow_dir="/home/racha/Documents/stage/workflow_Canny_MapReduce"/>
+	<database name="chiron" username="chiron" password="chiron" port="5433" server="localhost"/>
+	<conceptualWorkflow tag="workflow_canny_map_reduce" description="">
+		
+		<activity constrained="false" tag="divide_act" description="" type="SPLIT_MAP" activation="./experiment.cmd" template="%=WFDIR%/Divide_template">
+			<relation reltype="Input" name="IAct1"/>
+			<relation reltype="Output" name="OAct1" />
+			
+			<field name="ID" type="float" input="IAct1" output="OAct1" decimalplaces="0"/>
+			<field name="IMG1" type="text" input="IAct1" output="OAct1"/>
+		
+    	</activity>
+    	
+		<activity tag="gray_act" description="" type="MAP" activation="./experiment.cmd" template="%=WFDIR%/Gray_template">
+		<relation reltype="Input"  dependency="divide_act"/>
+			<relation reltype="Output" name="OAct2" output="OAct1"/>
+			
+			<field name="ID" type="float"  output="OAct2" decimalplaces="0"/>
+			<field name="IMG1" type="text"  output="OAct2"/>
+    	</activity>
+    	
+		<activity tag="gaussian_act" description="" type="MAP" activation="./experiment.cmd" template="%=WFDIR%/Gaussian_template">
+			<relation reltype="Input" dependency="gray_act"/>
+			<relation reltype="Output" name="OAct3" output="OAct2"/>
+			
+			<field name="ID" type="float" output="OAct3" decimalplaces="0"/>
+			<field name="IMG1" type="text" output="OAct3"/>
+    	</activity>
+    	
+		<activity tag="sobel_act" description="" type="MAP" activation="./experiment.cmd" template="%=WFDIR%/Sobel_template">
+			<relation reltype="Input" dependency="gaussian_act"/>
+			<relation reltype="Output" name="OAct4"/>
+			
+			<field name="ID" type="float" output="OAct4" decimalplaces="0"/>
+			<field name="IMG1" type="text" output="OAct4"/>
+			<field name="ANGLE" type="text" output="OAct4"/>
+				
+    	</activity>
+    	
+		<activity tag="non-max_act" description="" type="MAP" activation="./experiment.cmd" template="%=WFDIR%/Non-max_template">
+			<relation reltype="Input" dependency="sobel_act"/>
+			<relation reltype="Output" name="OAct5"/>
+			
+			<field name="ID" type="float" output="OAct5" decimalplaces="0"/>
+			<field name="IMG1" type="text" output="OAct5"/>
+			<field name="ANGLE" type="text" output="OAct5"/>	
+    	</activity>
+    	
+	<activity tag="hysteries_act" description="" type="MAP" activation="./experiment.cmd" template="%=WFDIR%/Hysteries_template">
+			<relation reltype="Input" dependency="non-max_act"/>
+			<relation reltype="Output" name="OAct6"/>
+			
+			<field name="ID" type="float"  output="OAct6" decimalplaces="0"/>
+			<field name="IMG1" type="text" output="OAct6"/>
+
+    	</activity>
+    	<activity tag="reassemble_act" description="" type="REDUCE" operand="ID" activation=" ./experiment.cmd;./reassemble.byte oact6" template="%=WFDIR%/bin/reassemble">
+			<relation reltype="Input" dependency="hysteries_act"/>
+			<relation reltype="Output" name="OAct7"/>
+			<field name="ID" type="float" output="OAct7" decimalplaces="0"/>
+			<field name="IMG1" type="text" output="OAct7"/></activity>
+	</conceptualWorkflow>
+	
+	<executionWorkflow tag="workflow_canny_map_reduce" execmodel="DYN_FAF" expdir="%=WFDIR%/exp">
+		<relation name="IAct1" filename="input.dataset"/>
+	</executionWorkflow>
+</SciCumulus>

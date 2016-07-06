@@ -1,0 +1,2 @@
+ID;IMG1;ANGLE
+1;/home/racha/Documents/stage/workflow_Canny_Reduce/Output/1/1/Sobel.ppm;/home/racha/Documents/stage/workflow_Canny_Reduce/Output/1/1/theta.csv

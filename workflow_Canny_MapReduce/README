@@ -1,0 +1,79 @@
+=== DESCRIPTION ============================================================
+This directory contains a workflow that demonstrate an implementation of the Canny Edge Detection algorithm.  
+the Canny edge detection algorithm that finds edges in an image. The input is a PPM image and the output is a black and white image with 1 pixel wide white lines denoting edges. 
+It has five stages: grayscale, gaussian blur, sobel filtering, non-maximum suppression, and hysteresis thresholding. 
+Each stage corresponds to an activitie of the workflow.
+
+
+  
+  * The Canny Edge Detection Algorithm
+    * Gaussian Blur
+    * Sobel Filtering
+    * Non-Maximum Suppression
+    * Hysteresis Thresholding
+    
+   
+  #The Canny Edge Detection Algorithm 
+
+ ##grayscale
+convert a color image of a ppm format to grayscale.
+ 
+ ##Gaussian Blur
+A gaussian blur is performed to reduce noise in the image. It is implemented using image convolution.
+Image convolution is an operation which essentially replaces each pixel with a weighted average of its neighbors. 
+ 
+ ##Sobel Filtering
+Sobel filtering replaces each pixel with a combination of the x and y derivatives of neighboring pixels. In doing so, pixels in high contrast areas will be "brighter" than pixels in low contrast areas. 
+This essentially finds areas where edges are most likely to exist, but it does not pinpoint precisely where the edges are, so they existe as a gradient of probabilities. 
+Similar to the gaussian blur, this is done using image convolution, but is performed twice: once for the x derivative and once for the y derivative. 
+The pixel is then replaced with essentially: sqrt( (di/dx)^2 + (di/dy)^2 ) where di represents the change in intensity. 
+During this stage, the direction of the gradient is also calculated for each pixel which is needed for non-maximum suppression.
+
+ ##Non-Maximum Suppression
+At this point, there exists gradients representing probable edges, but our end goal is to represent edges as a single 1 pixel line. 
+Non-maximum suppression rules out pixels which are part of an edge, but do not define the edge. The result is that we condense these wide gradient edges into a single 1 pixel line.
+Non-maximum suppression is performed by using the direction of the gradient found in the previous stage and comparing the current pixel with neighboring pixels on either side.
+If the pixel is lower in intensity than ether of these neighboring pixels, then it is not considered be the true edge, so its value is replaced by 0.
+If the pixel is the highest intensity among its neighbors in the direction of the gradient, then it may be the true edge, so its value is retained.
+
+ ##Hysteresis Thresholding
+We now have 1 pixel wide lines with values indicating the strength of the edge. In order to decide which of these should be considered an edge, we will use two threshold values.
+The low threshold indicates that pixels less than its value cannot be edges. The high threshold indicates that pixels higher than its value must be edges. 
+Pixels between these values will only be edges if they neighbor an edge. 
+
+  
+=== SOFTWARE REQUIREMENTS ============================================================
+This workflow execution have the following software requirements:
+1) Postgres Database Management System (DBMS) (www.postgresql.org)
+2) SPOC (http://mathiasbourgoin.github.io/SPOC)
+
+=== ENVIRONMENT CONFIGURATION ============================================================
+To use these softwares correctly in this workflow, please configure them as follows:
+1) Configuration of a relational database using Postgres DBMS.
+2) Compilation of the SPOC application code.
+3) Configuration of the file "input.dataset" in directory "exp", which represents the input
+relation from this workflow using Chiron.
+
+Obs(1): After the Postgres DBMS installation, please configure a relational database
+in this DBMS using the SQL script to generate the database schema to be used by
+Chiron. This SQL script is named as "chiron-database.sql" in directory "bin"
+
+Obs(2): To compile SPOC application code, please access the directory of this 
+application and execute make command in Linux-based operating system, as follows:
+$ cd bin/app-directory
+$ make clean
+$ make
+
+Obs(3): File with input dataset need to have all file paths updated according to the current 
+file system.
+
+=== WORKFLOW EXECUTION ==========================================================================
+To submit workflow execution using Chiron, please execute the following script:
+$ ./submit.sh
+
+Obs(4): This script invokes other three scripts, named as "delete.sh", "restore.sh", and "execute.sh".
+The former script deletes all directories generated from previous workflow executions in "exp" 
+directory. The second script executes ChironSetup in order to update the conceptual workflow in
+database. The third script invokes ChironCore to execute the workflow considering the conceptual 
+definition in Postgres's relational database.
+

@@ -1,0 +1,5 @@
+ID;IMG1
+1;/home/racha/Documents/stage/workflow_Canny_MapReduce/Output/1/1/parte1.ppm
+1;/home/racha/Documents/stage/workflow_Canny_MapReduce/Output/1/2/parte2.ppm
+1;/home/racha/Documents/stage/workflow_Canny_MapReduce/Output/1/3/parte3.ppm
+1;/home/racha/Documents/stage/workflow_Canny_MapReduce/Output/1/4/parte4.ppm

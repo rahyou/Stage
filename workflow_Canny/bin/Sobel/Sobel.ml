@@ -115,7 +115,7 @@ let _ =
   Spoc.Devices.flush !dev ();
 
  (*let sortie = "/home/racha/Documents/stage/workflow_Canny/Output/"file1^"_2.ppm" in*)
-  let sortie = "/home/racha/Documents/stage/workflow_Canny/Output/output_2.ppm" in
+  let sortie = "/home/racha/Documents/stage/workflow_Canny_Reduce/Output/output_2.ppm" in
 
   let ic1 = open_in file1 in
   let oc1 = open_out sortie in 
