@@ -1,8 +1,0 @@
-{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {4.1}}{\reset@font\mtcSfont 13}{section.4.1}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.1.1} Op\IeC {\'e}ration de calcul }{\reset@font\mtcSSfont 13}{subsection.4.1.1}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.1.2} Canny d\IeC {\'e}tection des contours }{\reset@font\mtcSSfont 14}{subsection.4.1.2}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode flou gaussien }{\reset@font\mtcPfont 14}{section*.1}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Sobel filtre et direction des contours}{\reset@font\mtcPfont 15}{section*.2}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Suppression des non-maximum}{\reset@font\mtcPfont 15}{section*.3}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Seuillage des contours}{\reset@font\mtcPfont 15}{section*.4}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Le flux de travail}{\reset@font\mtcPfont 16}{section*.5}}
