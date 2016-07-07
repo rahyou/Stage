@@ -63,7 +63,7 @@ let read_ascii_24 c =
     let b = c.b in
     (*float_of_int *)(r * 256 + g) * 256 + b;
   in
-
+Unix.mkdir ("~/Workflow") 0o777;
   Unix.mkdir  ("/home/racha/Documents/stage/workflow_Canny_MapReduce/Output/"^id) 0o777;
 
  Unix.mkdir  ("/home/racha/Documents/stage/workflow_Canny_MapReduce/Output/"^id^"/1/") 0o777;
