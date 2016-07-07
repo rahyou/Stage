@@ -1,3 +1,0 @@
-CPU Computation : PI = 1570008/2000000 = 3.140016
-Will use device : HD Graphics 4000
-GPU Computation : PI = 1998848/2000000 = 3.997696
