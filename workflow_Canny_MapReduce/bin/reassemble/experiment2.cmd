@@ -1,2 +1,5 @@
+echo "ID;TOTALFLOW" >> ERelation.txt 
+now=$(date +"%s")
+I=$(echo "($now - %=START%)" | bc -l) 
+echo "%=ID%;$I" >> ERelation.txt 
 
-cat ~/Documents/stage/workflow_Canny_MapReduce/bin/reassemble/Erelation.txt > $OLDPWD/ERelation.txt

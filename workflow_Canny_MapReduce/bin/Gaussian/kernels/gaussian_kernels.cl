@@ -5,9 +5,9 @@
 #endif
 
 
-__constant float gaus[3][3] = { {0, 1, 0},
-                                {1, -3, 1},
-                                {0, 1, 0} };
+__constant float gaus[3][3] = { {0, 0, 0},
+                                {0, 1, 0},
+                                {0, 0, 0} };
 
 #define L_SIZE 16
 

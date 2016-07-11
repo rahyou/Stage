@@ -37,8 +37,7 @@ let measure_time s f =
   Printf.printf "Time %s : %Fs\n%!" s (t1 -. t0);
   a;;
 
-
-
+let start = Unix.gettimeofday () 
 let files = ref []
 
 
@@ -79,8 +78,8 @@ let read_ascii_24 c =
   let oc3 = open_out (path^"/3/parte3.ppm") in
   let oc4 = open_out (path^"/4/parte4.ppm") in
 
-  let cols = (img.Rgb24.width /2)+2 in
-  let lins = (img.Rgb24.height /2)+2 in
+  let cols = (img.Rgb24.width /2) in
+  let lins = (img.Rgb24.height /2) in
   
      let ic1 = open_in file1 in
     let z = input_line ic1 in
@@ -136,89 +135,41 @@ let read_ascii_24 c =
      end;
      done;
      (*ajoute 2 cols
-      if p = 0 then 
-    begin   
-    let color = Rgb24.get img (j) (i) in
-     let c = read_ascii_24 color in
-     let r = c / 65536  and  g = c / 256 mod 256  and  b = c mod 256  in
-     output_byte oc1 r; output_byte oc1 g; output_byte oc1 b;
-     end;
-
-	if p = 1 then 
-	 begin
-	 let color = Rgb24.get img (j) ( lins + i ) in
-     let c = read_ascii_24 color in
-     let r = c / 65536  and  g = c / 256 mod 256  and  b = c mod 256  in
-	 output_byte oc2 r; output_byte oc2 g; output_byte oc2 b;
-	    end;
-	if p = 2 then 
-	    begin
-	      let color = Rgb24.get img (cols + j) ( i ) in
-     let c = read_ascii_24 color in
-     let r = c / 65536  and  g = c / 256 mod 256  and  b = c mod 256  in
-	 output_byte oc3 r; output_byte oc3 g; output_byte oc3 b;
-    end;
-	if p = 3 then 
-	    begin
-	      let color = Rgb24.get img (cols + j) ( lins  + i ) in
-     let c = read_ascii_24 color in
-     let r = c / 65536  and  g = c / 256 mod 256  and  b = c mod 256  in
-	output_byte oc4 r; output_byte oc4 g; output_byte oc4 b;
-     end;*)
+     *)
      done;
      
           (*ajoute 2 ligns
-      if p = 0 then 
-    begin   
-    let color = Rgb24.get img (j) (i) in
-     let c = read_ascii_24 color in
-     let r = c / 65536  and  g = c / 256 mod 256  and  b = c mod 256  in
-     output_byte oc1 r; output_byte oc1 g; output_byte oc1 b;
-     end;
-
-	if p = 1 then 
-	 begin
-	 let color = Rgb24.get img (j) ( lins + i ) in
-     let c = read_ascii_24 color in
-     let r = c / 65536  and  g = c / 256 mod 256  and  b = c mod 256  in
-	 output_byte oc2 r; output_byte oc2 g; output_byte oc2 b;
-	    end;
-	if p = 2 then 
-	    begin
-	      let color = Rgb24.get img (cols + j) ( i ) in
-     let c = read_ascii_24 color in
-     let r = c / 65536  and  g = c / 256 mod 256  and  b = c mod 256  in
-	 output_byte oc3 r; output_byte oc3 g; output_byte oc3 b;
-    end;
-	if p = 3 then 
-	    begin
-	      let color = Rgb24.get img (cols + j) ( lins  + i ) in
-     let c = read_ascii_24 color in
-     let r = c / 65536  and  g = c / 256 mod 256  and  b = c mod 256  in
-	output_byte oc4 r; output_byte oc4 g; output_byte oc4 b;
-     end;*)
+   *)
      done;
      close_out oc1;
      close_out oc2;
      close_out oc3;
      close_out oc4;
      
+     let t1 = Unix.gettimeofday () in
   begin     
  
   
    let oc = open_out "Erelation.txt" in
-    Printf.fprintf oc "ID;IMG1\n"(*;IMG2\n*);
+    Printf.fprintf oc "ID;START;ACTTIME;IMG1\n"(*;IMG2\n*);
     Printf.fprintf oc "%d;" (int_of_string(id));
-
+ Printf.fprintf oc "%F;" start;
+    Printf.fprintf oc "%F;" (t1 -. start);
     Printf.fprintf oc "%s/1/parte1.ppm\n" path ;
+    
         Printf.fprintf oc "%d;" (int_of_string(id));
-
+ Printf.fprintf oc "%F;" start;
+    Printf.fprintf oc "%F;" (t1 -. start);
     Printf.fprintf oc "%s/2/parte2.ppm\n" path;
+    
         Printf.fprintf oc "%d;" (int_of_string(id));
-
+ Printf.fprintf oc "%F;" start;
+    Printf.fprintf oc "%F;" (t1 -. start);
     Printf.fprintf oc "%s/3/parte3.ppm\n" path;
+    
         Printf.fprintf oc "%d;" (int_of_string(id));
-
+ Printf.fprintf oc "%F;" start;
+    Printf.fprintf oc "%F;" (t1 -. start);
     Printf.fprintf oc "%s/4/parte4.ppm\n" path;
   
     close_out oc;

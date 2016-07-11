@@ -32,8 +32,10 @@ let auto_transfers = ref false
 let verify = ref true
 let files = ref []
 let color = ref 0 
+let start = Unix.gettimeofday ()
 
-let _ =
+
+let _=
   Arg.parse ([]) (fun s -> files :=  s:: !files  ) "";
   Random.self_init();
   let args = List.rev !files in
@@ -110,7 +112,8 @@ let _ =
 
     Printf.printf "Fin\n";
     
-
+  let t1 = Unix.gettimeofday () in
+   
      let curDir = Sys.getcwd () in
      let dir = List.nth (Str.split (Str.regexp "/bin/") curDir) 0 in
      let path = dir^"/Output/"^id in
@@ -118,8 +121,10 @@ let _ =
      let sortie =  path^"/Gray.ppm" in
    
    let oc = open_out "Erelation.txt" in
-    Printf.fprintf oc "ID;IMG1\n";
+    Printf.fprintf oc "ID;START;ACTTIME;IMG1\n";
     Printf.fprintf oc "%s;" id;
+    Printf.fprintf oc "%F;" start;
+    Printf.fprintf oc "%F;" (t1 -. start);
     Printf.fprintf oc "%s\n" sortie;
     close_out oc;
 

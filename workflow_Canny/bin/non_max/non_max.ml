@@ -13,6 +13,7 @@ let auto_transfers = ref false
 let files = ref []
 let color = ref 0 
 
+let start = Unix.gettimeofday ()
 
 let read_ascii_24 c =
   let r = c.r in
@@ -27,8 +28,8 @@ in
   Arg.parse ([]) (fun s -> files :=  s:: !files  ) "";
   Random.self_init();
   let args = List.rev !files in
-  let id, file1, angle = match args with 
-    | [id; file1; angle] -> id, file1, angle
+  let id, st, file1, angle = match args with 
+    | [id; st; file1; angle] -> id, st, file1, angle
     | _ -> failwith "args error"
   in
 
@@ -122,7 +123,8 @@ if (not !auto_transfers) then
     Spoc.Mem.to_cpu res ();
   end;
 Spoc.Devices.flush !dev ();
-
+    
+  let t1 = Unix.gettimeofday () in
 
   let list = Str.split (Str.regexp "Sobel") file1 in
   let name, ext= match list with 
@@ -152,8 +154,10 @@ close_in ic1;
 
 let oc = open_out "Erelation.txt" in
 begin
-Printf.fprintf oc "ID;IMG1\n";
+Printf.fprintf oc "ID;START;ACTTIME;IMG1\n";
 Printf.fprintf oc "%s;" id;
+Printf.fprintf oc "%s;" st;
+Printf.fprintf oc "%F;" (t1 -. start);
 Printf.fprintf oc "%s\n" sortie;
 close_out oc;
 end

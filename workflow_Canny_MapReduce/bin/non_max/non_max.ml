@@ -9,7 +9,7 @@ let devices = Spoc.Devices.init ()
 
 let dev = ref devices.(1)
 let auto_transfers = ref false
-
+let start = Unix.gettimeofday ()
 let files = ref []
 let color = ref 0 
 
@@ -20,8 +20,8 @@ let _ =
   Arg.parse ([]) (fun s -> files :=  s:: !files  ) "";
   Random.self_init();
   let args = List.rev !files in
-  let id, file1, angle = match args with 
-    | [id; file1; angle] -> id, file1, angle
+  let id, st, file1, angle = match args with 
+    | [id; st; file1; angle] -> id, st, file1, angle
     | _ -> failwith "args error"
   in
 
@@ -34,13 +34,12 @@ let _ =
   let parse_int32 f =
     let fd = open_in f in
     let  a = Spoc.Vector.create Vector.int32 (img.Rgb24.height * img.Rgb24.width)in
-    let i = 0 in
     let _ = input_line fd in
-    let rec aux () = match input_line fd with
-      | s -> Spoc.Mem.set a i  (Int32.of_int (int_of_string (String.trim s))) ; i=i+1;  aux ()  
+    let rec aux i () = match input_line fd with
+      | s -> Spoc.Mem.set a i  (Int32.of_int (int_of_string (String.trim s))) ;   aux ( i+1 )  ()
       | exception End_of_file ->  Printf.printf "end of file"; 
       | exception Failure _ -> failwith "error"
-    in aux (); close_in fd; a
+    in aux 0 (); close_in fd; a
   in
 
   let read_ascii_24 c =
@@ -124,6 +123,8 @@ let _ =
     end;
   Spoc.Devices.flush !dev ();
 
+let t1 = Unix.gettimeofday () in
+  
    let list = Str.split (Str.regexp "Sobel") file1 in
   let name, ext= match list with 
     | [name; ext] -> name, ext
@@ -151,10 +152,11 @@ let _ =
   close_in ic1;
 
   let oc = open_out "Erelation.txt" in
-  Printf.fprintf oc "ID;IMG1\n";
+  Printf.fprintf oc "ID;START;ACTTIME;IMG1;\n";
   Printf.fprintf oc "%s;" id;
-  Printf.fprintf oc "%s\n" sortie;
+  Printf.fprintf oc "%s;" st;
+  Printf.fprintf oc "%F;" (t1 -. start);
+  Printf.fprintf oc "%s;" sortie;
   close_out oc;
-
 
 

@@ -1,2 +1,0 @@
-ID;IMG1
-2;/home/racha/Documents/stage/workflow_Canny/Output/2/Gaussian.ppm

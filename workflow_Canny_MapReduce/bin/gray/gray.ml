@@ -32,43 +32,35 @@ let auto_transfers = ref false
 let verify = ref true
 let files = ref []
 let color = ref 0 
+let start = Unix.gettimeofday ()
 
 let _ =
   Arg.parse ([]) (fun s -> files :=  s:: !files  ) "";
   Random.self_init();
   let args = List.rev !files in
-  let id, file1= match args with 
-    | [id; file1] -> id, file1
+  let id, st, file1= match args with 
+    | [id; st; file1] -> id, st, file1
     | _ -> failwith "args error "
   in
 
 
   let img = load_ppm file1 in
 
-  let read_24 ic =
-    let r = input_byte ic in
-    let g = input_byte ic in
-    let b = input_byte ic in
-
-    int_of_float ((0.21 *. (float (r))) +.
-                  (0.71 *. (float (g))) +.
-                  (0.07 *. (float (b))) )
-  in
   let read_r c =
     let r = c.r in
-    let g = c.g in
-    let b = c.b in
+    let _ = c.g in
+    let _ = c.b in
     r;
   in
   let read_g c =
-    let r = c.r in
+    let _ = c.r in
     let g = c.g in
-    let b = c.b in
+    let _ = c.b in
     g;
   in
   let read_b c =
-    let r = c.r in
-    let g = c.g in
+    let _ = c.r in
+    let _ = c.g in
     let b = c.b in
     b;
   in
@@ -115,7 +107,9 @@ let _ =
     measure_time "" 
       (fun () -> Kirc.run gpu_to_gray (a, img.Rgb24.height , img.Rgb24.width) (block,grid) 0 !dev);
 	Printf.printf "Fin\n";
-  
+   
+    let t1 = Unix.gettimeofday () in
+    
   let list = Str.split (Str.regexp "part") file1 in
   let name, ext= match list with 
     | [name; ext] -> name, ext
@@ -142,10 +136,12 @@ let _ =
     close_in ic1;
 
  
-   let oc = open_out "Erelation.txt" in
-    Printf.fprintf oc "ID;IMG1\n";
-    Printf.fprintf oc "%s;" id;
-    Printf.fprintf oc "%s\n" sortie;
-    close_out oc;
+  let oc = open_out "Erelation.txt" in
+  Printf.fprintf oc "ID;START;ACTTIME;IMG1;\n";
+  Printf.fprintf oc "%s;" id;
+  Printf.fprintf oc "%s;" st;
+  Printf.fprintf oc "%F;" (t1 -. start);
+  Printf.fprintf oc "%s;" sortie;
+  close_out oc;
 
   end;

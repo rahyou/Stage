@@ -9,7 +9,7 @@ let devices = Spoc.Devices.init ()
 
 let dev = ref devices.(1)
 let auto_transfers = ref false
-
+let start = Unix.gettimeofday ()
 let files = ref []
 let color = ref 0 
 
@@ -17,8 +17,8 @@ let _ =
   Arg.parse ([]) (fun s -> files :=  s:: !files  ) "";
   Random.self_init();
   let args = List.rev !files in
-  let id, file1 = match args with 
-    | [id; file1] -> id, file1
+  let id, st, file1 = match args with 
+    | [id; st; file1] -> id, st, file1
     | _ -> failwith "args error"
   in
 
@@ -110,7 +110,9 @@ let _ =
       Spoc.Mem.to_cpu res ();
     end;
   Spoc.Devices.flush !dev ();
-  
+    
+    let t1 = Unix.gettimeofday () in
+    
     let list = Str.split (Str.regexp "Non-max") file1 in
   let name, ext= match list with 
     | [name; ext] -> name, ext
@@ -137,8 +139,10 @@ let _ =
   close_in ic1;
 
   let oc = open_out "Erelation.txt" in
-  Printf.fprintf oc "ID;IMG1;\n";
+  Printf.fprintf oc "ID;START;ACTTIME;IMG1;\n";
   Printf.fprintf oc "%s;" id;
+         Printf.fprintf oc "%s;" st;
+    Printf.fprintf oc "%F;" (t1 -. start);
   Printf.fprintf oc "%s;" sortie;
 
   close_out oc;

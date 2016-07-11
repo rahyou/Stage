@@ -12,13 +12,14 @@ let auto_transfers = ref false
 
 let files = ref []
 let color = ref 0 
+let start = Unix.gettimeofday ()
 
 let _ =
   Arg.parse ([]) (fun s -> files :=  s:: !files  ) "";
   Random.self_init();
   let args = List.rev !files in
-  let id, file1 = match args with 
-    | [id; file1] -> id, file1
+  let id, st, file1 = match args with 
+    | [id; st; file1] -> id, st, file1
     | _ -> failwith "args error"
   in
 
@@ -109,6 +110,7 @@ let _ =
       Pervasives.flush stdout;
       Spoc.Mem.to_cpu res ();
     end;
+      let t1 = Unix.gettimeofday () in
   Spoc.Devices.flush !dev ();
   
      let list = Str.split (Str.regexp "Non-max") file1 in
@@ -137,8 +139,10 @@ let _ =
   close_in ic1;
 
   let oc = open_out "Erelation.txt" in
-  Printf.fprintf oc "ID;IMG1;\n";
+  Printf.fprintf oc "ID;FINFLOW;ACTTIME;IMG1;\n";
   Printf.fprintf oc "%s;" id;
+  Printf.fprintf oc "%F;" (t1 -. float_of_string(st));
+  Printf.fprintf oc "%F;" (t1 -. start);
   Printf.fprintf oc "%s;" sortie;
 
   close_out oc;

@@ -10,6 +10,8 @@
 			<relation reltype="Output" name="OAct1" />
 			
 			<field name="ID" type="float" input="IAct1" output="OAct1" decimalplaces="0"/>
+			<field name="START" type="text" output="OAct1"/>
+			<field name="ACTTIME" type="text" output="OAct1"/>
 			<field name="IMG1" type="text" input="IAct1" output="OAct1"/>
 		
     	</activity>
@@ -19,14 +21,17 @@
 			<relation reltype="Output" name="OAct2" output="OAct1"/>
 			
 			<field name="ID" type="float"  output="OAct2" decimalplaces="0"/>
+			<field name="START" type="text" output="OAct2"/>
+			<field name="ACTTIME" type="text" output="OAct2"/>
 			<field name="IMG1" type="text"  output="OAct2"/>
     	</activity>
     	
 		<activity tag="gaussian_act" description="" type="MAP" activation="./experiment.cmd" template="%=WFDIR%/Gaussian_template">
 			<relation reltype="Input" dependency="gray_act"/>
 			<relation reltype="Output" name="OAct3" output="OAct2"/>
-			
 			<field name="ID" type="float" output="OAct3" decimalplaces="0"/>
+			<field name="START" type="text" output="OAct3"/>
+			<field name="ACTTIME" type="text" output="OAct3"/>
 			<field name="IMG1" type="text" output="OAct3"/>
     	</activity>
     	
@@ -35,6 +40,8 @@
 			<relation reltype="Output" name="OAct4"/>
 			
 			<field name="ID" type="float" output="OAct4" decimalplaces="0"/>
+			<field name="START" type="text" output="OAct4"/>
+			<field name="ACTTIME" type="text" output="OAct4"/>
 			<field name="IMG1" type="text" output="OAct4"/>
 			<field name="ANGLE" type="text" output="OAct4"/>
 				
@@ -42,9 +49,10 @@
     	
 		<activity tag="non-max_act" description="" type="MAP" activation="./experiment.cmd" template="%=WFDIR%/Non-max_template">
 			<relation reltype="Input" dependency="sobel_act"/>
-			<relation reltype="Output" name="OAct5"/>
-			
+			<relation reltype="Output" name="OAct5"/>	
 			<field name="ID" type="float" output="OAct5" decimalplaces="0"/>
+			<field name="START" type="text" output="OAct5"/>
+			<field name="ACTTIME" type="text" output="OAct5"/>
 			<field name="IMG1" type="text" output="OAct5"/>
 			<field name="ANGLE" type="text" output="OAct5"/>	
     	</activity>
@@ -54,13 +62,17 @@
 			<relation reltype="Output" name="OAct6"/>
 			
 			<field name="ID" type="float"  output="OAct6" decimalplaces="0"/>
+			<field name="START" type="text" output="OAct6"/>
+			<field name="ACTTIME" type="text" output="OAct6"/>
 			<field name="IMG1" type="text" output="OAct6"/>
 
     	</activity>
-    	<activity tag="reassemble_act" description="" type="REDUCE" operand="ID" activation=" ./experiment.cmd;./reassemble.byte oact6" template="%=WFDIR%/bin/reassemble">
+    	<activity tag="reassemble_act" description="" type="REDUCE" operand="ID" activation=" ./experiment.cmd;./reassemble.byte oact6;./experiment2.cmd" template="%=WFDIR%/bin/reassemble">
 			<relation reltype="Input" dependency="hysteries_act"/>
 			<relation reltype="Output" name="OAct7"/>
 			<field name="ID" type="float" output="OAct7" decimalplaces="0"/>
+			<field name="TOTALFLOW" type="text" output="OAct7"/>
+			<field name="ACTTIME" type="text" output="OAct7"/>
 			<field name="IMG1" type="text" output="OAct7"/></activity>
 	</conceptualWorkflow>
 	
