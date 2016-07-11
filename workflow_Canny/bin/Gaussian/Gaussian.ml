@@ -109,8 +109,12 @@ let _ =
   Spoc.Devices.flush !dev ();
 
 
- (*let sortie = "/home/racha/Documents/stage/workflow_Canny/Output/"file1^"_1.ppm" in*)
-  let sortie = "/home/racha/Documents/stage/workflow_Canny/Output/output_1.ppm" in
+    let list = Str.split (Str.regexp "Gray") file1 in
+  let name, ext= match list with 
+    | [name; ext] -> name, ext
+    | _ -> failwith " error "
+  in
+     let sortie = name^"Gaussian.ppm" in
 
   let ic1 = open_in file1 in
   let oc1 = open_out sortie in 

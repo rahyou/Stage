@@ -111,8 +111,12 @@ let _ =
     end;
   Spoc.Devices.flush !dev ();
   
- (*let sortie = "/home/racha/Documents/stage/workflow_Canny/Output/"file1^"_4.ppm" in*)
-  let sortie = "/home/racha/Documents/stage/workflow_Canny_Reduce/Output/output_4.ppm" in
+     let list = Str.split (Str.regexp "Non-max") file1 in
+  let name, ext= match list with 
+    | [name; ext] -> name, ext
+    | _ -> failwith " error "
+  in
+     let sortie = name^"Hysteresis.ppm" in
 
   let ic1 = open_in file1 in
   let oc1 = open_out sortie in 

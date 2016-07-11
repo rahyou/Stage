@@ -1,9 +1,9 @@
 <SciCumulus>
 	<environment type="LOCAL" verbose="true"/>
-	<constraint workflow_exectag="workflow-reduce-gpu-1" cores="2" performance="false"/>
+	<constraint workflow_exectag="workflow-new" cores="2" performance="false"/>
 	<workspace workflow_dir="/home/racha/Documents/stage/workflow_Canny_MapReduce"/>
-	<database name="chiron" username="chiron" password="chiron" port="5433" server="localhost"/>
-	<conceptualWorkflow tag="workflow_canny_map_reduce" description="">
+<database name="scc2" username="scc2" password="scc2" port="5433" server="localhost"/>
+	<conceptualWorkflow tag="workflow_new" description="">
 		
 		<activity constrained="false" tag="divide_act" description="" type="SPLIT_MAP" activation="./experiment.cmd" template="%=WFDIR%/Divide_template">
 			<relation reltype="Input" name="IAct1"/>
@@ -64,7 +64,7 @@
 			<field name="IMG1" type="text" output="OAct7"/></activity>
 	</conceptualWorkflow>
 	
-	<executionWorkflow tag="workflow_canny_map_reduce" execmodel="DYN_FAF" expdir="%=WFDIR%/exp">
+	<executionWorkflow tag="workflow_new" execmodel="DYN_FAF" expdir="%=WFDIR%/exp">
 		<relation name="IAct1" filename="input.dataset"/>
 	</executionWorkflow>
 </SciCumulus>

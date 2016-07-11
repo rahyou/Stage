@@ -66,7 +66,7 @@ size_t l_col = get_local_id(1) + 1;
     barrier(CLK_LOCAL_MEM_FENCE);
 
    int my_magnitude = l_data[l_row][l_col];
-
+   const int EDGE = 16777215;
     // The following variables are used to address the matrices more easily
     switch (theta[pos])
     {
@@ -74,15 +74,15 @@ size_t l_col = get_local_id(1) + 1;
         // Check neighbors to the East and West
         case 0:
             // supress me if my neighbor has larger magnitude
-            if (my_magnitude <= l_data[l_row][l_col+1] || // east
-                my_magnitude <= l_data[l_row][l_col-1])   // west
+            if (my_magnitude >= l_data[l_row][l_col+1]/2 && // east
+                my_magnitude >= l_data[l_row][l_col-1]/2)   // west
             {
-                out[pos] = 0;
+                out[pos] = my_magnitude;
             }
             // otherwise, copy my value to the output buffer
             else
             {
-                out[pos] = my_magnitude;
+                out[pos] = 0;
             }
             break;
                 
@@ -90,15 +90,15 @@ size_t l_col = get_local_id(1) + 1;
         // Check neighbors to the NE and SW
         case 45:
             // supress me if my neighbor has larger magnitude
-            if (my_magnitude <= l_data[l_row-1][l_col+1] || // north east
-                my_magnitude <= l_data[l_row+1][l_col-1])   // south west
+            if (my_magnitude >= l_data[l_row-1][l_col+1] && // north east
+                my_magnitude >= l_data[l_row+1][l_col-1])   // south west
             {
-                out[pos] = 0;
+                out[pos] = my_magnitude;
             }
             // otherwise, copy my value to the output buffer
             else
             {
-                out[pos] = my_magnitude;
+                out[pos] = 0;
             }
             break;
                     
@@ -106,15 +106,15 @@ size_t l_col = get_local_id(1) + 1;
         // Check neighbors to the North and South
         case 90:
             // supress me if my neighbor has larger magnitude
-            if (my_magnitude <= l_data[l_row-1][l_col] || // north
-                my_magnitude <= l_data[l_row+1][l_col])   // south
+            if (my_magnitude >= l_data[l_row-1][l_col] && // north
+                my_magnitude >= l_data[l_row+1][l_col])   // south
             {
-                out[pos] = 0;
+                out[pos] = my_magnitude;
             }
             // otherwise, copy my value to the output buffer
             else
             {
-                out[pos] = my_magnitude;
+                out[pos] = 0;
             }
             break;
                     
@@ -122,20 +122,23 @@ size_t l_col = get_local_id(1) + 1;
         // Check neighbors to the NW and SE
         case 135:
             // supress me if my neighbor has larger magnitude
-            if (my_magnitude <= l_data[l_row-1][l_col-1] || // north west
-                my_magnitude <= l_data[l_row+1][l_col+1])   // south east
+            if (my_magnitude >= l_data[l_row-1][l_col-1] && // north west
+                my_magnitude >= l_data[l_row+1][l_col+1])   // south east
             {
-                out[pos] = 0;
+                out[pos] = my_magnitude;
             }
             // otherwise, copy my value to the output buffer
             else
             {
-                out[pos] = my_magnitude;
+                out[pos] = 0;
             }
             break;
                     
         default:
-            out[pos] = my_magnitude;
+            out[pos] = 0;
             break;
     } 
+
 }
+
+

@@ -39,36 +39,28 @@ let _ =
   let args = List.rev !files in
   let id, file1= match args with 
     | [id; file1] -> id, file1
-    | _ -> failwith "args error        "
+    | _ -> failwith "args error "
   in
 
 
   let img = load_ppm file1 in
 
-  let read_24 ic =
-    let r = input_byte ic in
-    let g = input_byte ic in
-    let b = input_byte ic in
-
-    int_of_float ((0.21 *. (float (r))) +.
-                  (0.71 *. (float (g))) +.
-                  (0.07 *. (float (b))) )
-  in
+  
   let read_r c =
     let r = c.r in
-    let g = c.g in
-    let b = c.b in
+    let _ = c.g in
+    let _ = c.b in
     r;
   in
   let read_g c =
-    let r = c.r in
+    let _ = c.r in
     let g = c.g in
-    let b = c.b in
+    let _ = c.b in
     g;
   in
   let read_b c =
-    let r = c.r in
-    let g = c.g in
+    let _ = c.r in
+    let _ = c.g in
     let b = c.b in
     b;
   in
@@ -118,12 +110,16 @@ let _ =
 
     Printf.printf "Fin\n";
     
-     (*let sortie = "/home/racha/Documents/stage/workflow_Canny/Output/"file1^".ppm" in*)
-    let sortie = "/home/racha/Documents/stage/workflow_Canny_Reduce/Output/output.ppm" in
+
+     let curDir = Sys.getcwd () in
+     let dir = List.nth (Str.split (Str.regexp "/bin/") curDir) 0 in
+     let path = dir^"/Output/"^id in
+     Unix.mkdir path 0o777;
+     let sortie =  path^"/Gray.ppm" in
+   
    let oc = open_out "Erelation.txt" in
-    Printf.fprintf oc "ID;IMG1\n"(*;IMG2\n*);
+    Printf.fprintf oc "ID;IMG1\n";
     Printf.fprintf oc "%s;" id;
-    (* Printf.fprintf oc "%s;" file1;*)
     Printf.fprintf oc "%s\n" sortie;
     close_out oc;
 

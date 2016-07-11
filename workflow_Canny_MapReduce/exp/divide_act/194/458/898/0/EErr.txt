@@ -1,1 +1,0 @@
-Fatal error: exception Unix.Unix_error(Unix.ENOENT, "mkdir", "~/workflow_Canny_MapReduce/Output/1")

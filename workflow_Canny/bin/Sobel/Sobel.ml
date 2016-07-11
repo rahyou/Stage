@@ -114,8 +114,12 @@ let _ =
     end;
   Spoc.Devices.flush !dev ();
 
- (*let sortie = "/home/racha/Documents/stage/workflow_Canny/Output/"file1^"_2.ppm" in*)
-  let sortie = "/home/racha/Documents/stage/workflow_Canny_Reduce/Output/output_2.ppm" in
+     let list = Str.split (Str.regexp "Gaussian") file1 in
+  let name, ext= match list with 
+    | [name; ext] -> name, ext
+    | _ -> failwith " error "
+  in
+     let sortie = name^"Sobel.ppm" in
 
   let ic1 = open_in file1 in
   let oc1 = open_out sortie in 
@@ -136,7 +140,7 @@ let _ =
   close_in ic1;
 
 
-  let angle = "/home/racha/Documents/stage/workflow_Canny/Output/theta.csv" in
+  let angle = name^"/theta.csv" in
   let oc = open_out angle in
   Printf.fprintf oc "theta\n";
   for t = 0 to (Spoc.Vector.length theta - 1) do

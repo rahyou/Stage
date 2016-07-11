@@ -1,2 +1,0 @@
-ID;IMG1
-1;/home/racha/Documents/stage/workflow_Canny_MapReduce/Output/1/4/Non-max.ppm

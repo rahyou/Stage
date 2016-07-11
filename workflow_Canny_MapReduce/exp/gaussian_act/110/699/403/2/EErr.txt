@@ -1,1 +1,0 @@
-Fatal error: exception Sys_error("/home/racha/Documents/stage/workflow_Canny_Reduce/Output/1/4/Gray.ppm: No such file or directory")
