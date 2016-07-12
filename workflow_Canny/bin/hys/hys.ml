@@ -110,7 +110,7 @@ let _ =
       Pervasives.flush stdout;
       Spoc.Mem.to_cpu res ();
     end;
-      let t1 = Unix.gettimeofday () in
+      let t1 = Unix.time () in
   Spoc.Devices.flush !dev ();
   
      let list = Str.split (Str.regexp "Non-max") file1 in

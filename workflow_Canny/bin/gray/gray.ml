@@ -32,7 +32,7 @@ let auto_transfers = ref false
 let verify = ref true
 let files = ref []
 let color = ref 0 
-let start = Unix.gettimeofday ()
+let start = Unix.time ()
 
 
 let _=

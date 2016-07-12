@@ -1,2 +1,0 @@
-ID;START;ACTTIME;IMG1;
-1;1468259706.36;0.163468837738;/home/racha/Documents/stage/workflow_Canny_MapReduce/Output/1/4/Gray.ppm;

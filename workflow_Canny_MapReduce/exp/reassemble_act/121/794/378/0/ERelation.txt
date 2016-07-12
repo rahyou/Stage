@@ -1,2 +1,0 @@
-ID;TOTALFLOW
-1;6.64

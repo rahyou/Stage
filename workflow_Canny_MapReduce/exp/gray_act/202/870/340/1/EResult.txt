@@ -1,0 +1,5 @@
+Allocating Vectors (on CPU memory ) 470249
+Computing 
+Time  : 0.00232195854187s
+Fin
+ 
