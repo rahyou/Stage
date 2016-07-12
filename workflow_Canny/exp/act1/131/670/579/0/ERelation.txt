@@ -1,2 +1,0 @@
-ID;START;ACTTIME;IMG1
-2;1468329334.;2.68158102036;/home/racha/Documents/stage/workflow_Canny/Output/2/Gray.ppm

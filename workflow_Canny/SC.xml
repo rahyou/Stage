@@ -44,7 +44,7 @@
 			<relation reltype="Input" dependency="act4"/>
 			<relation reltype="Output" name="OAct5"/>
 			<field name="ID" type="float"  output="OAct5" decimalplaces="0"/>
-			<field name="FINFLOW" type="text" output="OAct5"/>
+			<field name="TOTALTIME" type="text" output="OAct5"/>
 			<field name="ACTTIME" type="text" output="OAct5"/>
 			<field name="IMG1" type="text" output="OAct5"/>
     	</activity>

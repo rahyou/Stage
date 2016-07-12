@@ -71,7 +71,7 @@
 			<relation reltype="Input" dependency="hysteries_act"/>
 			<relation reltype="Output" name="OAct7"/>
 			<field name="ID" type="float" output="OAct7" decimalplaces="0"/>
-			<field name="TOTALFLOW" type="text" output="OAct7"/>
+			<field name="TOTALTIME" type="text" output="OAct7"/>
 			<field name="ACTTIME" type="text" output="OAct7"/>
 			<field name="IMG1" type="text" output="OAct7"/></activity>
 	</conceptualWorkflow>

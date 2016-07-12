@@ -1,2 +1,0 @@
-ID;START;ACTTIME;IMG1
-2;1468329334.;1.38591599464;/home/racha/Documents/stage/workflow_Canny/Output/2/Gaussian.ppm

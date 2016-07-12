@@ -1,2 +1,0 @@
-ID;START;ACTTIME;IMG1;ANGLE
-1;1468330587.44;0.585276842117;/home/racha/Documents/stage/workflow_Canny_MapReduce/Output/1/2/Sobel.ppm;/home/racha/Documents/stage/workflow_Canny_MapReduce/Output/1/2/theta.csv

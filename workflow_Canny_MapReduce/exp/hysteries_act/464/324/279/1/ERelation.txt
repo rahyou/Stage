@@ -1,0 +1,2 @@
+ID;START;ACTTIME;IMG1;
+1;1468333236.94;0.383373022079;/home/racha/Documents/stage/workflow_Canny_MapReduce/Output/1/1/Hysteresis.ppm;

@@ -139,7 +139,7 @@ let _ =
   close_in ic1;
 
   let oc = open_out "Erelation.txt" in
-  Printf.fprintf oc "ID;FINFLOW;ACTTIME;IMG1;\n";
+  Printf.fprintf oc "ID;TOTALTIME;ACTTIME;IMG1;\n";
   Printf.fprintf oc "%s;" id;
   Printf.fprintf oc "%F;" (t1 -. float_of_string(st));
   Printf.fprintf oc "%F;" (t1 -. start);
