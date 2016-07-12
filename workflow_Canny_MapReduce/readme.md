@@ -17,5 +17,4 @@
 
 ###### oact7
 
-
- ![alt tag](https://github.com/rahyou/Stage/images/map_reduce/oact7-mapreduce.png)
+![alt tag](https://github.com/rahyou/Stage/blob/master/images/map_reduce/oact7-mapreduce.png)
