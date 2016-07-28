@@ -91,13 +91,12 @@ size_t pos = g_col * cols + g_row;
  	short Sum = ((abs((int)sumx )+abs((int)sumy)));
  int hyp = (int)hypot(sumx,sumy) ;
 
+
  if (hyp > max)
     {
         out[pos]= hyp;
     }
-else  out[pos]  =  0;
-if ( (pos < cols *2 ) ) out[pos]  =  0;
-
+else  out[pos]  =  0  ;
     // Compute the direction angle theta in radians
     // atan2 has a range of (-PI, PI) degrees
     angle = atan2(sumy,sumx);

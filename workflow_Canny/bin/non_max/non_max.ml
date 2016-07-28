@@ -13,7 +13,7 @@ let auto_transfers = ref false
 let files = ref []
 let color = ref 0 
 
-let start = Unix.gettimeofday ()
+let start = Unix.time ()
 
 let read_ascii_24 c =
   let r = c.r in
@@ -124,7 +124,7 @@ if (not !auto_transfers) then
   end;
 Spoc.Devices.flush !dev ();
     
-  let t1 = Unix.gettimeofday () in
+  let t1 = Unix.time () in
 
   let list = Str.split (Str.regexp "Sobel") file1 in
   let name, ext= match list with 
@@ -133,14 +133,10 @@ Spoc.Devices.flush !dev ();
   in
      let sortie = name^"Non-max.ppm" in
 
-let ic1 = open_in file1 in
 let oc1 = open_out sortie in 
-let aa = input_line ic1 in
-Printf.fprintf oc1 "%s\n" aa;
-let b = input_line ic1 in
-Printf.fprintf oc1 "%s\n" b ;
-let c = input_line ic1 in
-Printf.fprintf oc1 "%s \n" c;
+Printf.fprintf oc1 "P6\n";
+Printf.fprintf oc1 "%d %d\n" img.Rgb24.height img.Rgb24.width;
+Printf.fprintf oc1 "255 \n" ;
 
 
 for t = 0 to (Spoc.Vector.length res - 1) do
@@ -150,7 +146,7 @@ for t = 0 to (Spoc.Vector.length res - 1) do
 done;
 
 close_out oc1;
-close_in ic1;
+
 
 let oc = open_out "Erelation.txt" in
 begin

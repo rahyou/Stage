@@ -91,11 +91,7 @@ size_t pos = g_col * cols + g_row;
  	short Sum = ((abs((int)sumx )+abs((int)sumy)));
  int hyp = (int)hypot(sumx,sumy) ;
 
-   // if (hyp > 0)
-   // {
-    //    out[pos]= hyp;
-   // }
-   // else
+
  if (hyp > max)
     {
         out[pos]= hyp;

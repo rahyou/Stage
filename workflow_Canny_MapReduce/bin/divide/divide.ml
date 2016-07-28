@@ -134,12 +134,9 @@ let read_ascii_24 c =
 	output_byte oc4 r; output_byte oc4 g; output_byte oc4 b;
      end;
      done;
-     (*ajoute 2 cols
-     *)
+
      done;
-     
-          (*ajoute 2 ligns
-   *)
+
      done;
      close_out oc1;
      close_out oc2;

@@ -14,7 +14,7 @@ let files = ref []
 let color = ref 0 
 
 
-let start = Unix.gettimeofday ()
+let start = Unix.time ()
 
 
 let _ =
@@ -115,7 +115,7 @@ let _ =
     end;
   Spoc.Devices.flush !dev ();
 
-  let t1 = Unix.gettimeofday () in
+  let t1 = Unix.time () in
   
      let list = Str.split (Str.regexp "Gaussian") file1 in
   let name, ext= match list with 
@@ -124,14 +124,10 @@ let _ =
   in
      let sortie = name^"Sobel.ppm" in
 
-  let ic1 = open_in file1 in
   let oc1 = open_out sortie in 
-  let aa = input_line ic1 in
-  Printf.fprintf oc1 "%s\n" aa;
-  let b = input_line ic1 in
-  Printf.fprintf oc1 "%s\n" b ;
-  let c = input_line ic1 in
-  Printf.fprintf oc1 "%s \n" c;
+Printf.fprintf oc1 "P6\n";
+ Printf.fprintf oc1 "%d %d\n" img.Rgb24.height img.Rgb24.width ;
+  Printf.fprintf oc1 "255 \n" ;
 
   for t = 0 to (Spoc.Vector.length res - 1) do
     let c =  Spoc.Mem.get res t in
@@ -140,7 +136,7 @@ let _ =
   done;
 
   close_out oc1;
-  close_in ic1;
+
 
 
   let angle = name^"/theta.csv" in

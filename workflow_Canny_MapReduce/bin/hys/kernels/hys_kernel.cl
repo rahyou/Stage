@@ -11,8 +11,10 @@ __kernel void hys_kernel(__global const int * data,
                            __global   int * out,
                                        int cols,
                                        int rows)
-{	float lowThresh = 60;
-	float highThresh = 170;
+{	
+
+float lowThresh = 170 ;
+	float highThresh =255;
 	float med = (highThresh + lowThresh)/2;
 int g_row = get_local_id (1) + (get_group_id(1) * get_local_size (1));	
 int g_col = get_local_id (0) + (get_group_id(0) * get_local_size (0));
@@ -25,8 +27,8 @@ int pos = g_col * cols + g_row;
     
     if (magnitude >= highThresh)
         out[pos] = EDGE;
-    else if (magnitude <= lowThresh)
-        out[pos] =  0;
+   else if (magnitude <= lowThresh)
+       out[pos] =  0;
     else
     {
         
@@ -35,5 +37,9 @@ int pos = g_col * cols + g_row;
         else
              out[pos] = 0;
     }
+
+    
 }
+
+
 

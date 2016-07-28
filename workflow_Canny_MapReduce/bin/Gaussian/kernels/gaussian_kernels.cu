@@ -3,9 +3,14 @@ extern "C" {
 #endif
 #define L_SIZE 16
 
-__constant__ float gaus[3][3] =  { {0, 1, 0},
-                                {1, -3, 1},
-                                {0, 1, 0} };
+//__constant__ float gaus[3][3] =  { {0, 1, 0},
+  //                              {1, -3, 1},
+    //                            {0, 1, 0} };
+
+
+__constant__ float gaus[3][3] =  { {0, 0, 0},
+                                {0, 1, 0},
+                                {0, 0, 0} };
 
 __global__ void gauss_kernel( int* data,
                                int* out,

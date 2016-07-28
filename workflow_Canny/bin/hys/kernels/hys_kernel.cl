@@ -13,8 +13,8 @@ __kernel void hys_kernel(__global const int * data,
                                        int rows)
 {	
 
-float lowThresh = 10000000;
-	float highThresh = 10000000;
+float lowThresh = 170 ;
+	float highThresh =255;
 	float med = (highThresh + lowThresh)/2;
 int g_row = get_local_id (1) + (get_group_id(1) * get_local_size (1));	
 int g_col = get_local_id (0) + (get_group_id(0) * get_local_size (0));

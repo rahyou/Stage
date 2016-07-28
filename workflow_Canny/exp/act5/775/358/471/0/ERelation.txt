@@ -1,2 +1,0 @@
-ID;TOTALTIME;ACTTIME;IMG1;
-2;15.;1.04655003548;/home/racha/Documents/stage/workflow_Canny/Output/2/Hysteresis.ppm;

@@ -9,10 +9,12 @@ let devices = Spoc.Devices.init ()
 
 let dev = ref devices.(1)
 let auto_transfers = ref false
+
 let files = ref []
 let color = ref 0 
-let start = Unix.gettimeofday ()
 
+
+let start = Unix.time ()
 
 
 let _ =
@@ -112,23 +114,20 @@ let _ =
       Spoc.Mem.to_cpu theta ();
     end;
   Spoc.Devices.flush !dev ();
-    
-  let t1 = Unix.gettimeofday () in
-    let list = Str.split (Str.regexp "Gaussian") file1 in
+
+  let t1 = Unix.time () in
+  
+     let list = Str.split (Str.regexp "Gaussian") file1 in
   let name, ext= match list with 
     | [name; ext] -> name, ext
     | _ -> failwith " error "
   in
      let sortie = name^"Sobel.ppm" in
 
-  let ic1 = open_in file1 in
   let oc1 = open_out sortie in 
-  let aa = input_line ic1 in
-  Printf.fprintf oc1 "%s\n" aa;
-  let b = input_line ic1 in
-  Printf.fprintf oc1 "%s\n" b ;
-  let c = input_line ic1 in
-  Printf.fprintf oc1 "%s \n" c;
+Printf.fprintf oc1 "P6\n";
+ Printf.fprintf oc1 "%d %d\n" img.Rgb24.width img.Rgb24.height ;
+  Printf.fprintf oc1 "255 \n" ;
 
   for t = 0 to (Spoc.Vector.length res - 1) do
     let c =  Spoc.Mem.get res t in
@@ -137,9 +136,10 @@ let _ =
   done;
 
   close_out oc1;
-  close_in ic1;
-  
-  let angle = name^"theta.csv" in
+
+
+
+  let angle = name^"/theta.csv" in
   let oc = open_out angle in
   Printf.fprintf oc "theta\n";
   for t = 0 to (Spoc.Vector.length theta - 1) do

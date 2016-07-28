@@ -31,7 +31,7 @@ let dev = ref devices.(1)
 let auto_transfers = ref false
 let verify = ref true
 let files = ref []
-let color = ref 0 
+
 let start = Unix.time ()
 
 
@@ -47,42 +47,24 @@ let _=
 
   let img = load_ppm file1 in
 
-  
-  let read_r c =
-    let r = c.r in
-    let _ = c.g in
-    let _ = c.b in
-    r;
-  in
-  let read_g c =
-    let _ = c.r in
-    let g = c.g in
-    let _ = c.b in
-    g;
-  in
-  let read_b c =
-    let _ = c.r in
-    let _ = c.g in
-    let b = c.b in
-    b;
-  in
+ 
 
   let  a = Spoc.Vector.create Vector.int32 (img.Rgb24.height * img.Rgb24.width * 3)  in
   Printf.printf "Allocating Vectors (on CPU memory ) %d\n" (Spoc.Vector.length a - 1);
   flush stdout; 
 
-  let l = img.Rgb24.height in
-  let c = img.Rgb24.width  in
+  let height = img.Rgb24.height in
+  let width = img.Rgb24.width  in
   let f= ref 0 in
 
-  for i=0 to l-1 do  
-    for j=0 to c-1 do
+  for i=0 to height-1 do  
+    for j=0 to width-1 do
       let color = Rgb24.get img j i in
-      a.[<!f>] <- (Int32.of_int (read_r color)) ;
+      a.[<!f>] <- (Int32.of_int (color.r)) ;
       f := !f+1;
-      a.[<!f>] <- (Int32.of_int (read_g color)) ;
+      a.[<!f>] <- (Int32.of_int (color.g)) ;
       f := !f+1; 
-      a.[<!f>] <- (Int32.of_int (read_b color)) ;
+      a.[<!f>] <- (Int32.of_int (color.b)) ;
       f := !f+1;
     done;
   done;
@@ -120,6 +102,18 @@ let _=
      Unix.mkdir path 0o777;
      let sortie =  path^"/Gray.ppm" in
    
+       let oc = open_out sortie in 
+	Printf.fprintf oc "P6\n" ;
+    Printf.fprintf oc "%d %d \n"  width height ;
+    Printf.fprintf oc "%d\n" 255;
+
+    for i = 0 to Vector.length a - 1 do
+      let c =  Int32.to_int  a.[<i>]  in
+      output_byte oc c; 
+    done;
+    close_out oc;
+
+  
    let oc = open_out "Erelation.txt" in
     Printf.fprintf oc "ID;START;ACTTIME;IMG1\n";
     Printf.fprintf oc "%s;" id;
@@ -127,24 +121,6 @@ let _=
     Printf.fprintf oc "%F;" (t1 -. start);
     Printf.fprintf oc "%s\n" sortie;
     close_out oc;
-
-
-    let ic1 = open_in file1 in
-    let oc1 = open_out sortie in 
-    let z = input_line ic1 in
-    Printf.fprintf oc1 "%s\n" z;
-    let b = input_line ic1 in
-    Printf.fprintf oc1 "%s\n" b ;
-    let c = input_line ic1 in
-    Printf.fprintf oc1 "%s\n" c;
-
-
-    for i = 0 to Vector.length a - 1 do
-      let c =  Int32.to_int  a.[<i>]  in
-      output_byte oc1 c; 
-    done;
-    close_out oc1;
-    close_in ic1;
 
  
   end;

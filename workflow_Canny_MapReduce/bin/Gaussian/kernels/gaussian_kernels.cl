@@ -9,6 +9,12 @@ __constant float gaus[3][3] = { {0, 0, 0},
                                 {0, 1, 0},
                                 {0, 0, 0} };
 
+
+//__constant__ float gaus[3][3] =  { {0, 1, 0},
+  //                              {1, -3, 1},
+    //                            {0, 1, 0} };
+
+
 #define L_SIZE 16
 
 // Gaussian Kernel
@@ -68,7 +74,7 @@ size_t l_col = get_local_id(1) + 1;
 
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
-            sum += gaus[i][j] * l_data[i+l_row-1][j+l_col-1];
+            sum += gaus[i][j] * (l_data[i+l_row-1][j+l_col-1]);
 
 
 out[pos] =max(0,sum);

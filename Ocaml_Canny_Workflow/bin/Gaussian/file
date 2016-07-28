@@ -1,0 +1,104 @@
+#use  "readppm.ml"
+
+let files = ref []
+
+
+
+let read_ascii_24 c =
+  let r = c.r in
+  let g = c.g in
+  let b = c.b in
+  (r * 256 + g) * 256 + b
+;;
+
+let convolve_get_value img x y kernel divisor offset = 
+  let sum_r = ref 0.0
+  and sum_g = ref 0.0
+  and sum_b = ref 0.0 in
+
+  for i = -1 to 1 do
+    for j = -1 to 1 do
+      let color = Rgb24.get img x+i y+j  in
+      sum_r := !sum_r +. kernel.(j+1).(i+1) *. (float color.r);
+      sum_g := !sum_g +. kernel.(j+1).(i+1) *. (float color.g);
+      sum_b := !sum_b +. kernel.(j+1).(i+1) *. (float color.b);
+    done;
+  done;
+  ( !sum_r /. divisor +. offset,
+    !sum_g /. divisor +. offset,
+    !sum_b /. divisor +. offset )
+
+
+
+
+let start = Unix.gettimeofday ()
+
+    Arg.parse ([]) (fun s -> files :=  s:: !files  ) "";
+  Random.self_init();
+  let args = List.rev !files in
+  let id, st, file1= match args with 
+    | [id; st; file1] -> id, st, file1
+    | _ -> failwith "args error"
+  in
+
+
+
+  let img = load_ppm file1 in
+
+  let list = Str.split (Str.regexp "Gray") file1 in
+  let name, ext= match list with 
+    | [name; ext] -> name, ext
+    | _ -> failwith " error "
+  in
+  let sortie = name^"Gaussian.ppm" in
+
+
+
+  let oc = open_out sortie in 
+  Printf.fprintf oc "P6\n" ;
+  Printf.fprintf oc "%d %d \n"  width height ;
+  Printf.fprintf oc "%d\n" 255;
+
+
+  let height = img.Rgb24.height in
+  let width = img.Rgb24.width  in
+
+  let kernel = [|
+    [| 0.; 0.; 0. |];
+    [|  0.;  1.;  0. |];
+    [|  0.;  0.;  0. |];
+  |] 
+  in
+  for i=0 to height-1 do
+    for j=0 to width-1 do
+
+      let color = convolve_get_value matrice kernel 1.0 0.0 x y in
+      match color with 
+      |(r, g, b)->
+        output_byte oc (int_of_float(r)); output_byte oc (int_of_float(g));output_byte oc (int_of_float(b)); 
+
+    done;
+  done;
+  close_out oc; 
+
+  Printf.printf "Fin\n";
+
+
+
+  let t1 = Unix.gettimeofday () in
+
+
+
+  let oc = open_out "Erelation.txt" in
+  Printf.fprintf oc "ID;START;ACTTIME;IMG1\n";
+  Printf.fprintf oc "%s;" id;
+  Printf.fprintf oc "%s;" st;
+  Printf.fprintf oc "%F;" (t1 -. start);
+  Printf.fprintf oc "%s\n" sortie;
+  close_out oc;
+
+
+
+
+
+

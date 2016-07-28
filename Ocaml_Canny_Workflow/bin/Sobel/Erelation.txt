@@ -1,0 +1,2 @@
+ID;START;ACTTIME;IMG1;ANGLE
+4;121.197154999;Sobel.ppm;theta.csv

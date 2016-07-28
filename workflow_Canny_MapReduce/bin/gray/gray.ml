@@ -32,7 +32,7 @@ let auto_transfers = ref false
 let verify = ref true
 let files = ref []
 let color = ref 0 
-let start = Unix.gettimeofday ()
+let start = Unix.time ()
 
 let _ =
   Arg.parse ([]) (fun s -> files :=  s:: !files  ) "";
@@ -46,24 +46,6 @@ let _ =
 
   let img = load_ppm file1 in
 
-  let read_r c =
-    let r = c.r in
-    let _ = c.g in
-    let _ = c.b in
-    r;
-  in
-  let read_g c =
-    let _ = c.r in
-    let g = c.g in
-    let _ = c.b in
-    g;
-  in
-  let read_b c =
-    let _ = c.r in
-    let _ = c.g in
-    let b = c.b in
-    b;
-  in
 
   let  a = Spoc.Vector.create Vector.int32 (img.Rgb24.height * img.Rgb24.width * 3)  in
   Printf.printf "Allocating Vectors (on CPU memory ) %d\n" (Spoc.Vector.length a - 1);
@@ -76,11 +58,11 @@ let _ =
   for i=0 to l-1 do  
     for j=0 to c-1 do
       let color = Rgb24.get img j i in
-      a.[<!f>] <- (Int32.of_int (read_r color)) ;
+      a.[<!f>] <- (Int32.of_int (color.r)) ;
       f := !f+1;
-      a.[<!f>] <- (Int32.of_int (read_g color)) ;
+      a.[<!f>] <- (Int32.of_int (color.g)) ;
       f := !f+1; 
-      a.[<!f>] <- (Int32.of_int (read_b color)) ;
+      a.[<!f>] <- (Int32.of_int (color.b)) ;
       f := !f+1;
     done;
   done;
@@ -108,7 +90,7 @@ let _ =
       (fun () -> Kirc.run gpu_to_gray (a, img.Rgb24.height , img.Rgb24.width) (block,grid) 0 !dev);
 	Printf.printf "Fin\n";
    
-    let t1 = Unix.gettimeofday () in
+    let t1 = Unix.time() in
     
   let list = Str.split (Str.regexp "part") file1 in
   let name, ext= match list with 
@@ -118,22 +100,19 @@ let _ =
      let sortie = name^"Gray.ppm" in
 
 
-    let ic1 = open_in file1 in
+
     let oc1 = open_out sortie in 
-    let z = input_line ic1 in
-    Printf.fprintf oc1 "%s\n" z;
-    let b = input_line ic1 in
-    Printf.fprintf oc1 "%s\n" b ;
-    let c = input_line ic1 in
-    Printf.fprintf oc1 "%s\n" c;
-
-
+    Printf.fprintf oc1 "P6\n" ;
+    Printf.fprintf oc1 "%d %d \n" img.Rgb24.width  img.Rgb24.height ;
+    Printf.fprintf oc1 "255 \n" ;
+    
+    
     for i = 0 to Vector.length a - 1 do
       let c =  Int32.to_int  a.[<i>]  in
       output_byte oc1 c; 
     done;
     close_out oc1;
-    close_in ic1;
+
 
  
   let oc = open_out "Erelation.txt" in
