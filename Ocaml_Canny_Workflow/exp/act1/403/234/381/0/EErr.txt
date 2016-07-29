@@ -1,1 +1,0 @@
-/bin/bash: ./experiment.cmd: Permission non accordée

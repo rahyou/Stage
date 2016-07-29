@@ -1,0 +1,37 @@
+\n\n\n\n\n\n\n\n\n\n
+
+Deleting experiment files...
+Restoring provenance database...
+Executing scientific workflow...
+Chiron...
+Prepare...
+   Getting conceptual workflow...
+   Getting workflow execution...
+Open...
+Execute...
+cp /home/racha/Documents/stage/Ocaml_Canny_Workflow/template_act1/* /home/racha/Documents/stage/Ocaml_Canny_Workflow/exp/act1/167/143/966/0/ -r -f
+./experiment.cmd >> /home/racha/Documents/stage/Ocaml_Canny_Workflow/exp/act1/167/143/966/0/EResult.txt 2>> /home/racha/Documents/stage/Ocaml_Canny_Workflow/exp/act1/167/143/966/0/EErr.txt
+[storeOutputRelation] /home/racha/Documents/stage/Ocaml_Canny_Workflow/exp/act1/167/143/966/0/
+[relation] storeOutputRelation() - COPY "workflow-cpu-canny".oact1(EWKFID, previoustaskid, previousactid, nextactid, ID, START, ACTTIME, IMG1) FROM STDIN WITH CSV DELIMITER AS ';'
+[relation] storeOutputRelation() - 6425;5427;7760;7761;2;1469807807.;20.5116150379;/home/racha/Documents/stage/Ocaml_Canny_Workflow/Output/2/Gray.ppm
+
+cp /home/racha/Documents/stage/Ocaml_Canny_Workflow/template_act2/* /home/racha/Documents/stage/Ocaml_Canny_Workflow/exp/act2/994/312/368/0/ -r -f
+./experiment.cmd >> /home/racha/Documents/stage/Ocaml_Canny_Workflow/exp/act2/994/312/368/0/EResult.txt 2>> /home/racha/Documents/stage/Ocaml_Canny_Workflow/exp/act2/994/312/368/0/EErr.txt
+[storeOutputRelation] /home/racha/Documents/stage/Ocaml_Canny_Workflow/exp/act2/994/312/368/0/
+[relation] storeOutputRelation() - COPY "workflow-cpu-canny".oact2(EWKFID, previoustaskid, previousactid, nextactid, ID, START, ACTTIME, IMG1) FROM STDIN WITH CSV DELIMITER AS ';'
+[relation] storeOutputRelation() - 6425;5428;7761;7762;2;1469807807.;120.046557903;/home/racha/Documents/stage/Ocaml_Canny_Workflow/Output/2/Gaussian.ppm
+
+cp /home/racha/Documents/stage/Ocaml_Canny_Workflow/template_act3/* /home/racha/Documents/stage/Ocaml_Canny_Workflow/exp/act3/180/365/626/0/ -r -f
+./experiment.cmd >> /home/racha/Documents/stage/Ocaml_Canny_Workflow/exp/act3/180/365/626/0/EResult.txt 2>> /home/racha/Documents/stage/Ocaml_Canny_Workflow/exp/act3/180/365/626/0/EErr.txt
+Exception in thread "Thread-2" java.lang.OutOfMemoryError: Java heap space
+	at java.util.Arrays.copyOf(Arrays.java:3332)
+	at java.lang.AbstractStringBuilder.expandCapacity(AbstractStringBuilder.java:137)
+	at java.lang.AbstractStringBuilder.ensureCapacityInternal(AbstractStringBuilder.java:121)
+	at java.lang.AbstractStringBuilder.append(AbstractStringBuilder.java:421)
+	at java.lang.StringBuilder.append(StringBuilder.java:136)
+	at chiron.ChironUtils.ReadFile(ChironUtils.java:223)
+	at chiron.concept.Map$MapActivation.execute(Map.java:90)
+	at chiron.EActivation.executeActivation(EActivation.java:81)
+	at chiron.EHead.run(EHead.java:71)
+
+

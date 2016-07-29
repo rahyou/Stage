@@ -139,7 +139,7 @@ Printf.fprintf oc1 "P6\n";
 
 
 
-  let angle = name^"/theta.csv" in
+  let angle = name^"theta.csv" in
   let oc = open_out angle in
   Printf.fprintf oc "theta\n";
   for t = 0 to (Spoc.Vector.length theta - 1) do

@@ -1,0 +1,2 @@
+ID;START;ACTTIME;IMG1
+1;1469823397.6;0.;/home/racha/Documents/stage/workflow_Canny_MapReduce/Output/1/1/Gaussian.ppm

@@ -81,24 +81,23 @@ let read_ascii_24 c =
   let cols = (img.Rgb24.width /2) in
   let lins = (img.Rgb24.height /2) in
   
-     let ic1 = open_in file1 in
-    let z = input_line ic1 in
-    Printf.fprintf oc1 "%s\n" z;
-        Printf.fprintf oc2 "%s\n" z;
-            Printf.fprintf oc3 "%s\n" z;
-                Printf.fprintf oc4 "%s\n" z;
+
+    Printf.fprintf oc1 "P6\n";
+        Printf.fprintf oc2 "P6\n";
+            Printf.fprintf oc3 "P6\n";
+                Printf.fprintf oc4 "P6\n";
                 
-    let _ = input_line ic1 in
+
     Printf.fprintf oc1 "%d %d\n" cols lins;
     Printf.fprintf oc2 "%d %d\n" cols lins;
     Printf.fprintf oc3 "%d %d\n" cols lins;
     Printf.fprintf oc4 "%d %d\n" cols lins; 
     
-    let c = input_line ic1 in
-    Printf.fprintf oc1 "%s\n" c;
-    Printf.fprintf oc2 "%s\n" c;
-  	Printf.fprintf oc3 "%s\n" c;
-  	Printf.fprintf oc4 "%s\n" c;
+
+    Printf.fprintf oc1 "255 \n";
+    Printf.fprintf oc2 "255 \n";
+  	Printf.fprintf oc3 "255 \n";
+  	Printf.fprintf oc4 "255 \n";
   	  
  for p=0 to 3 do 	  
  for i=0 to lins -1 do

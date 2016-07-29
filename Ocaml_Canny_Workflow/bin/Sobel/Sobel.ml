@@ -39,15 +39,12 @@ let get_theta colorx colory =
   let theta = ref 0 in
 let angle = ref 0.0 in
 
-  Printf.printf "%F		%F  	Fin\n\n" colorx colory;
+
 angle := atan2 colory colorx;
-  Printf.printf "%F		Fin\n\n" !angle;
-  
-if (!angle < 0.)  then 
-	
+
+if (!angle < 0.)  then	
 	angle := mod_float (!angle +.( 2. *. pi)) (2. *. pi);
-	
- Printf.printf "%F		iffffffff\n\n" !angle;
+
 theta :=  (int_of_float (57.29577951 *. (!angle *. (pi /. 8.) +. (pi /. 8.) -. 0.0001) /. 45.) * 45) mod 180 ;
   (!theta)
 ;;
@@ -75,10 +72,7 @@ let start = Unix.gettimeofday () in
     | _ -> failwith " error "
   in
      let sortie = name^"Sobel.ppm" in
- 
-
-  
- let angle = name^"/theta.csv" in
+  let angle = name^"theta.csv" in
   let oangle = open_out angle in
   Printf.fprintf oangle "theta\n";
   
@@ -139,7 +133,7 @@ close_out oangle;
   Printf.fprintf oc "ID;START;ACTTIME;IMG1;ANGLE\n";
   Printf.fprintf oc "%s;" id;
   Printf.fprintf oc "%s;" st;
-    Printf.fprintf oc "%F;" (t1 -. start);
+  Printf.fprintf oc "%F;" (t1 -. start);
   Printf.fprintf oc "%s;" sortie;
   Printf.fprintf oc "%s\n" angle ;
   close_out oc;

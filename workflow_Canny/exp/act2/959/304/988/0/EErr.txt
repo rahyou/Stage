@@ -1,0 +1,3 @@
+Unknown error executing clFlush on Quadro 1000M (Device 0).
+
+Fatal error: exception OpenCL.INVALID_MEM_OBJECT

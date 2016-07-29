@@ -126,7 +126,7 @@ let _ =
 
   let oc1 = open_out sortie in 
 Printf.fprintf oc1 "P6\n";
- Printf.fprintf oc1 "%d %d\n" img.Rgb24.height img.Rgb24.width ;
+ Printf.fprintf oc1 "%d %d\n" img.Rgb24.width img.Rgb24.height ;
   Printf.fprintf oc1 "255 \n" ;
 
   for t = 0 to (Spoc.Vector.length res - 1) do
@@ -139,7 +139,7 @@ Printf.fprintf oc1 "P6\n";
 
 
 
-  let angle = name^"/theta.csv" in
+  let angle = name^"theta.csv" in
   let oc = open_out angle in
   Printf.fprintf oc "theta\n";
   for t = 0 to (Spoc.Vector.length theta - 1) do

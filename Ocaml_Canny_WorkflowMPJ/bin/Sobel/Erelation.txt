@@ -1,0 +1,2 @@
+ID;START;ACTTIME;IMG1;ANGLE
+2;1469801358.;4.04772782326;/home/racha/Documents/stage/Ocaml_Canny_WorkflowMPJ/Output/2/Sobel.ppm;/home/racha/Documents/stage/Ocaml_Canny_WorkflowMPJ/Output/2//theta.csv

@@ -1,0 +1,2 @@
+Will use device : Quadro 1000M
+Will use simple precision

@@ -1,0 +1,2 @@
+ID;TOTALTIME;ACTTIME;IMG1;
+2;10.1045351028;0.338177204132;/home/racha/Documents/stage/Ocaml_Canny_WorkflowMPJ/Output/2/Hysteresis.ppm;

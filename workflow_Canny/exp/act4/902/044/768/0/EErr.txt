@@ -1,0 +1,1 @@
+Fatal error: exception Sys_error("/home/racha/Documents/stage/workflow_Canny/Output/2/Sobel.ppm: No such file or directory")

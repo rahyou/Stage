@@ -1,0 +1,11 @@
+Will use device : Quadro 1000M
+Will use simple precision
+Fin
+Transfering Values (on Device memory)
+Computing 
+compile 
+Transfering Vectors (on CPU memory)
+ 
+IN: spoc_opencl_device_to_cpu@ 744
+IN: spoc_opencl_flush@ 288
+IN: spoc_opencl_device_to_cpu@ 741

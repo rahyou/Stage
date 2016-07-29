@@ -122,7 +122,7 @@ let _ =
 
   let oc1 = open_out sortie in 
   Printf.fprintf oc1 "P6\n";
-  Printf.fprintf oc1 "%d %d\n"  width height;
+  Printf.fprintf oc1 "%d %d\n" width height;
   Printf.fprintf oc1 "255 \n";
 
 

@@ -1,6 +1,6 @@
 <SciCumulus>
 	<environment type="LOCAL" verbose="true"/>
-	<constraint workflow_exectag="workflow-map-gpu-1" cores="2" performance="false"/>
+	<constraint workflow_exectag="workflow-map-gpu-1" cores="8" performance="false"/>
 	<workspace workflow_dir="/home/racha/Documents/stage/Ocaml_Canny_Workflow"/>
 	<database name="scc2" username="scc2" password="scc2" port="5433" server="localhost"/>
 	<conceptualWorkflow tag="workflow-cpu-canny" description="">

@@ -1,0 +1,24 @@
+Deleting experiment files...
+Restoring provenance database...
+Executing scientific workflow...
+Chiron...
+Prepare...
+[Fatal Error] :1:1: Contenu non autorisé dans le prologue.
+org.xml.sax.SAXParseException; systemId: file:/home/racha/Documents/stage/Ocaml_Canny_WorkflowMPJ/0/; lineNumber: 1; columnNumber: 1; Contenu non autorisé dans le prologue.
+	at com.sun.org.apache.xerces.internal.parsers.DOMParser.parse(DOMParser.java:257)
+	at com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl.parse(DocumentBuilderImpl.java:339)
+	at javax.xml.parsers.DocumentBuilder.parse(DocumentBuilder.java:205)
+	at chiron.XMLReader.readXMLConfiguration(XMLReader.java:112)
+	at chiron.Chiron.prepare(Chiron.java:107)
+	at chiron.Chiron.main(Chiron.java:52)
+Chiron...
+Prepare...
+[Fatal Error] :1:1: Fin prématurée du fichier.
+org.xml.sax.SAXParseException; systemId: file:/home/racha/Documents/stage/Ocaml_Canny_WorkflowMPJ/1/; lineNumber: 1; columnNumber: 1; Fin prématurée du fichier.
+	at com.sun.org.apache.xerces.internal.parsers.DOMParser.parse(DOMParser.java:257)
+	at com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl.parse(DocumentBuilderImpl.java:339)
+	at javax.xml.parsers.DocumentBuilder.parse(DocumentBuilder.java:205)
+	at chiron.XMLReader.readXMLConfiguration(XMLReader.java:112)
+	at chiron.Chiron.prepare(Chiron.java:107)
+	at chiron.Chiron.main(Chiron.java:52)
+
