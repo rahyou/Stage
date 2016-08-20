@@ -37,7 +37,7 @@ let measure_time s f =
   Printf.printf "Time %s : %Fs\n%!" s (t1 -. t0);
   a;;
 
-let start = Unix.gettimeofday () 
+let start = Unix.time () 
 let files = ref []
 
 
@@ -142,7 +142,7 @@ let read_ascii_24 c =
      close_out oc3;
      close_out oc4;
      
-     let t1 = Unix.gettimeofday () in
+     let t1 = Unix.time () in
   begin     
  
   
