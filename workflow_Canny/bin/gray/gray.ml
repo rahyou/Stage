@@ -94,7 +94,7 @@ let _=
 
     Printf.printf "Fin\n";
     
-  let t1 = Unix.gettimeofday () in
+  let t1 = Unix.time () in
    
      let curDir = Sys.getcwd () in
      let dir = List.nth (Str.split (Str.regexp "/bin/") curDir) 0 in
