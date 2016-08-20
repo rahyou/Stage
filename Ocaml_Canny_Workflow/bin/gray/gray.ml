@@ -57,7 +57,7 @@ let start = Unix.time () in
 
     Printf.printf "Fin\n";
     
-  let t1 = Unix.gettimeofday () in
+  let t1 = Unix.time () in
    
    
    let oc = open_out "Erelation.txt" in
