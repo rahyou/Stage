@@ -109,7 +109,7 @@ let files = ref [] in
   Printf.printf "Fin\n";
 
 
-  let t1 = Unix.gettimeofday () in
+  let t1 = Unix.time () in
 
  (* let list = Str.split (Str.regexp "Non-max") file1 in
      let name, ext= match list with 
